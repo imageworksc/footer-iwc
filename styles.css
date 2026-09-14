@@ -447,6 +447,10 @@ a { color: inherit; }
   position: relative;          /* above the wash, which is already gone by here */
   background: var(--band-tint);
   border-top: 1px solid var(--border);
+  /* room for the cookie panel while it is up, set by script.js, so it never
+     covers the line once you reach the foot of the page */
+  padding-bottom: var(--cookie-dock, 0px);
+  transition: padding-bottom .22s var(--ease);
 }
 
 .legal__inner {
@@ -492,49 +496,40 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE — a card floating in the bottom-left corner
-   On the footer's navy, with the deep theme's hairline round it, the green
-   rule along the top and a shadow that lifts it off the ground. It floats
-   over whatever is beneath it, the legal line included. It comes up from
-   8px below on the panels' timings and goes back the same way, and under
-   the cursor it lifts a step further, the way the brand's buttons do.
+   8. COOKIE NOTICE — a bar the width of the viewport, on the footer's navy
+   Flat, with the green rule along the top and the shadow cast upward. Its content sits on the footer's shell, so the copy lines up
+   with the columns and the button with the legal links. It comes up from
+   8px below on the panel's own timings and goes back the same way.
    ========================================================================== */
 .cookie {
   position: fixed;
   z-index: 10;
-  inset-inline-start: var(--gutter);
-  inset-block-end: var(--gutter);
-  width: min(24rem, calc(100% - 2 * var(--gutter)));
-  padding: 1.125rem 1.25rem 1.25rem;
-  border: 1px solid var(--border);
+  inset-inline: 0;
+  inset-block-end: 0;
+  padding-block: .875rem 1rem;
   border-top: 2px solid var(--green);
-  border-radius: var(--r);
-  box-shadow: 0 2px 4px rgba(10, 44, 77, .2), 0 18px 40px rgba(10, 44, 77, .35);
+  box-shadow: 0 -8px 24px rgba(10, 44, 77, .25);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity .18s var(--ease), transform .25s var(--ease), box-shadow .25s ease;
+  transition: opacity .18s var(--ease), transform .22s var(--ease);
 }
 .cookie.is-in {
   opacity: 1;
   transform: none;
 }
-.cookie.is-in:hover,
-.cookie.is-in:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 8px rgba(10, 44, 77, .24), 0 26px 52px rgba(10, 44, 77, .42);
-}
 
 .cookie__inner {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: .875rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .875rem 2.5rem;
 }
 
 .cookie__text {
-  align-self: stretch;
-  font-size: var(--step--1);
-  line-height: 1.55;
+  flex: 1 1 30rem;
+  font-size: var(--step-0);
+  line-height: 1.5;
 }
 
 .cookie__link {
@@ -549,6 +544,7 @@ a { color: inherit; }
 
 /* The nav's button: it stays put and only changes colour. */
 .cookie__btn {
+  flex: none;
   height: var(--hit);
   padding-inline: 1.375rem;
   border: 1.5px solid var(--green);
@@ -632,6 +628,4 @@ a { color: inherit; }
   *,
   *::before,
   *::after { transition-duration: .001ms !important; }
-  .cookie.is-in:hover,
-  .cookie.is-in:focus-within { transform: none; }
 }
