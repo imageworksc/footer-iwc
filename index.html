@@ -89,7 +89,7 @@
         </div>
 
         <nav class="col" aria-label="Services">
-          <h2 class="col__label">Services</h2>
+          <h2 class="eyebrow">Services</h2>
           <ul class="col__list">
             <li><a class="col__link" href="#">Web Design</a></li>
             <li><a class="col__link" href="https://imageworksc.github.io/ai-web-design/">AI Website Design</a></li>
@@ -104,7 +104,7 @@
         </nav>
 
         <nav class="col" aria-label="Company">
-          <h2 class="col__label">Company</h2>
+          <h2 class="eyebrow">Company</h2>
           <ul class="col__list">
             <li><a class="col__link" href="#">Our Work</a></li>
             <li><a class="col__link" href="#">About</a></li>
@@ -113,7 +113,7 @@
             <li><a class="col__link" href="#">Contact</a></li>
           </ul>
 
-          <h2 class="col__label col__label--next">Platform Expertise</h2>
+          <h2 class="eyebrow eyebrow--next">Platform Expertise</h2>
           <ul class="col__list">
             <li><a class="col__link" href="#">Drupal</a></li>
             <li><a class="col__link" href="#">WordPress</a></li>
@@ -121,7 +121,7 @@
         </nav>
 
         <div class="col col--contact">
-          <h2 class="col__label">Questions? Quote?</h2>
+          <h2 class="eyebrow">Questions? Quote?</h2>
           <p class="col__text">Call or text us: <a class="col__phone" href="tel:+17039287309">(703) 928-7309</a></p>
 
           <div class="place">
@@ -150,18 +150,19 @@
 
   <!-- ====================================================================
        COOKIE NOTICE
-       Last in the flow and sticky to the bottom of the viewport, so it
-       rides along while you scroll and never covers the legal line once
-       you reach the foot of the page. Hidden until script.js confirms it
-       has not been accepted yet.
+       A panel, the way the nav's dropdowns are panels: white, bordered,
+       a green rule along the top. It sits at the foot of the viewport on
+       the content's left edge, and while it is up the legal bar keeps
+       room for it, so it never covers the line. Hidden until script.js
+       confirms it has not been accepted yet.
        ==================================================================== -->
-  <div class="cookie" role="region" aria-label="Cookie notice" hidden>
-    <div class="wrap cookie__inner">
-      <p class="cookie__text">This website uses cookies to offer you a better browsing experience. By using this site, you consent to our use of cookies. <a class="cookie__link" href="#">Privacy Policy</a></p>
+  <div class="cookie" role="region" aria-labelledby="cookie-title" hidden>
+    <h2 class="eyebrow cookie__title" id="cookie-title">Cookies</h2>
+    <p class="cookie__text">This website uses cookies to offer you a better browsing experience. By using this site, you consent to our use of cookies. <a class="cookie__link" href="#">Privacy Policy</a></p>
+    <div class="cookie__actions">
       <button class="cookie__btn" type="button">Accept</button>
     </div>
   </div>
-
   <script src="script.js?v=dev"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
      2. Base
      3. Ground
      4. Footer shell and the wash
-     5. Label — the panels' section heading
+     5. Eyebrow — the panels' section heading
      6. Columns
      7. Legal bar
      8. Cookie notice
@@ -58,15 +58,11 @@
   --tint-blue: #e5edf7;          /* the panel row under the cursor */
   --sep: #c2ccdb;                /* the utility bar's separator */
 
-  /* ---- on navy (the cookie bar) ---- */
-  --on-navy: var(--white);
-  --on-navy-line: rgba(255, 255, 255, .16);
-
   /* ---- shape: the brand squares its corners at 2px ---- */
   --r: 2px;
 
   /* ---- depth ---- */
-  --shadow-lift: 0 4px 12px rgba(20, 40, 80, .18);
+  --shadow-card: 0 1px 3px rgba(20, 40, 80, .08), 0 14px 34px rgba(20, 40, 80, .1);
   --ring: 0 0 0 3px rgba(128, 195, 74, .5), 0 0 0 1px rgba(20, 60, 102, .55);
   --ring-on-navy: 0 0 0 2px var(--navy-deep), 0 0 0 4px var(--green);
 
@@ -84,7 +80,6 @@
   --step--2: .8125rem;    /* 13px — the utility / legal bar */
   --step--1: .90625rem;   /* 14.5px — panel rows */
   --step-0: .9375rem;     /* 15px — nav links, addresses, fields */
-  --step-1: 1rem;         /* 16px — the cookie line */
 
   /* ---- motion ---- */
   --ease: cubic-bezier(.16, .84, .44, 1);
@@ -154,7 +149,6 @@ a { color: inherit; }
   box-shadow: var(--ring);
   border-radius: var(--r);
 }
-.cookie :where(a, button):focus-visible { box-shadow: var(--ring-on-navy); }
 
 .wrap {
   width: 100%;
@@ -301,10 +295,11 @@ a { color: inherit; }
 }
 
 /* ==========================================================================
-   5. LABEL — the panels' section heading: the brand's eyebrow, without its
-   dot, and the hairline that finishes the rule the label starts.
+   5. EYEBROW — the panels' section heading: the brand's eyebrow, without
+   its dot, and the hairline that finishes the rule the label starts. Heads
+   the columns, and the cookie panel.
    ========================================================================== */
-.col__label {
+.eyebrow {
   display: flex;
   align-items: center;
   gap: .5625rem;
@@ -315,13 +310,13 @@ a { color: inherit; }
   line-height: 1.3;
   text-transform: uppercase;
 }
-.col__label::after {
+.eyebrow::after {
   content: '';
   flex: 1;
   height: 1px;
   background: var(--border);
 }
-.col__label--next { margin-top: 1.5rem; }
+.eyebrow--next { margin-top: 1.5rem; }
 
 
 /* ==========================================================================
@@ -453,6 +448,10 @@ a { color: inherit; }
   position: relative;          /* above the wash, which is already gone by here */
   background: var(--band-tint);
   border-top: 1px solid var(--border);
+  /* room for the cookie panel while it is up, set by script.js, so it never
+     covers the line once you reach the foot of the page */
+  padding-bottom: var(--cookie-dock, 0px);
+  transition: padding-bottom .22s var(--ease);
 }
 
 .legal__inner {
@@ -498,62 +497,72 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE
+   8. COOKIE NOTICE — a panel, the way the nav's dropdowns are panels
+   White, a hairline border, the green rule along the top, the card shadow.
+   It comes up from 8px below on the panel's own timings and goes back the
+   same way. On the content's left edge, so it lines up with the columns.
    ========================================================================== */
 .cookie {
-  position: sticky;
-  bottom: 0;
+  position: fixed;
   z-index: 10;
-  background: var(--navy);
-  color: var(--on-navy);
-  padding-block: .75rem;
-  box-shadow: 0 -8px 24px rgba(10, 44, 77, .18);
-  transition: transform .35s var(--ease), opacity .3s ease;
+  inset-block-end: var(--gutter);
+  inset-inline-start: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
+  width: min(24rem, calc(100% - 2 * var(--gutter)));
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--green);
+  border-radius: var(--r);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .18s var(--ease), transform .22s var(--ease);
 }
-.cookie--leaving { transform: translateY(100%); opacity: 0; }
-
-.cookie__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: .875rem 2.5rem;
+.cookie.is-in {
+  opacity: 1;
+  transform: none;
 }
 
 .cookie__text {
-  flex: 1 1 28rem;
-  font-size: var(--step-1);
-  line-height: 1.5;
-  text-wrap: balance;   /* when it has to wrap, split the sentence evenly rather than orphan the link */
+  margin-top: .625rem;
+  font-size: var(--step--1);
+  line-height: 1.55;
 }
 
 .cookie__link {
-  color: var(--green);
-  text-decoration: underline;
-  text-underline-offset: .15em;
+  color: var(--green-ink);
+  font-weight: 700;
+  text-decoration: none;
   white-space: nowrap;  /* never break "Privacy Policy" across lines */
-  transition: color .2s ease;
+  transition: color .18s var(--ease);
 }
-.cookie__link:hover { color: var(--white); }
+.cookie__link:hover,
+.cookie__link:focus-visible { color: var(--blue); }
 
+.cookie__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .875rem;
+}
+
+/* The nav's button: it stays put and only changes colour. */
 .cookie__btn {
-  flex: none;
-  min-width: 9.75rem;                /* 156px */
-  height: 3.25rem;                   /* 52px */
-  padding: 0 2.5rem;
-  border: 0;
+  height: var(--hit);
+  padding-inline: 1.375rem;
+  border: 1.5px solid var(--green);
   border-radius: var(--r);
   background: var(--green);
   color: var(--white);
   font: inherit;
-  font-size: 1.25rem;
+  font-size: var(--step-0);
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
-  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
+  transition: filter .18s var(--ease);
 }
-.cookie__btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); filter: brightness(1.04); }
-.cookie__btn:active { transform: translateY(-1px); }
-
+.cookie__btn:hover,
+.cookie__btn:focus-visible { filter: brightness(1.06); }
 
 /* ==========================================================================
    9. BREAKPOINTS
@@ -609,9 +618,7 @@ a { color: inherit; }
   }
   .social { margin: 0 0 0 -.75rem; }
   .col--contact { grid-template-columns: 1fr; }
-  .cookie { padding-block: 1rem; }
-  .cookie__text { font-size: var(--step-0); }
-  .cookie__btn { width: 100%; height: 3rem; font-size: 1.125rem; }
+  .cookie__btn { width: 100%; }
 }
 
 
@@ -624,6 +631,4 @@ a { color: inherit; }
   *,
   *::before,
   *::after { transition-duration: .001ms !important; }
-  .cookie__btn:hover,
-  .cookie__btn:active { transform: none; }
 }

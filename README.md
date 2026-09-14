@@ -2,7 +2,7 @@
 
 The site footer on its own: the *Services* / *Company* / *Platform
 Expertise* menus, contact and both locations, the legal line, and the
-cookie notice that sits along the bottom of the viewport. Same copy and
+cookie notice that sits at the foot of the viewport. Same copy and
 structure as the footer on
 [imageworks-home](https://github.com/imageworksc/imageworks-home) — minus
 the location map — laid out clean on the design system from the
@@ -22,6 +22,9 @@ and made of its parts, turned to face the other way:
   on the left. No underlines anywhere.
 - **The legal bar** is the utility bar mirrored — the same tinted band and
   hairline, 13px at 600, links turning blue on hover.
+- **The cookie notice** is a dropdown panel — white, a hairline border, the
+  green rule along the top, the card shadow, the eyebrow as its heading —
+  coming up from 8px below on the panel's own timings.
 - **The mark** is set by height at 40px like the nav bar's, and the tokens
   are the nav's, verbatim.
 
@@ -54,9 +57,9 @@ in under the hairline and out again before the legal line. They stop under
 
 | File | What it holds |
 | --- | --- |
-| `index.html` | The footer, the cookie notice, and an empty page body above them |
-| `styles.css` | Brand tokens, the footer, and the cookie bar |
-| `script.js` | The cookie notice's Accept |
+| `index.html` | The footer, the cookie panel, and an empty page body above them |
+| `styles.css` | Brand tokens, the footer, and the cookie panel |
+| `script.js` | The cookie panel: showing it, Accept, and the room the legal bar keeps for it |
 | `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
 | `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
@@ -83,12 +86,13 @@ arrow functions, optional chaining — in one closure.
   scales as one piece instead of shrinking to a strip along the bottom.
   Narrower than 1920px it stays at the browser default and respects the
   user's font-size setting.
-- **Cookie notice** — sticky to the bottom of the viewport; it rides along
-  while you scroll and sits below the legal line once you reach the foot of
-  the page, so nothing is ever covered. *Accept* slides it away and remembers
-  the answer for the tab (`sessionStorage`), so a new tab brings it back for
-  review. To make it stick across visits like the live site, change
-  `sessionStorage` to `localStorage` in `script.js`.
+- **Cookie notice** — fixed at the foot of the viewport on the content's
+  left edge, 384px wide (full width on phones, where *Accept* fills it).
+  While it is up the legal bar keeps room for it below its line, so it never
+  covers the line once you reach the foot of the page. *Accept* sends it
+  back down and remembers the answer for the tab (`sessionStorage`), so a
+  new tab brings it back for review. To make it stick across visits like
+  the live site, change `sessionStorage` to `localStorage` in `script.js`.
 
 ## Design system
 
