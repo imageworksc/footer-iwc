@@ -26,12 +26,11 @@
      3. Ground
      4. Footer shell and the wash
      5. Label — the panels' section heading
-     6. Newsletter
-     7. Columns
-     8. Legal bar
-     9. Cookie notice
-    10. Breakpoints
-    11. Reduced motion
+     6. Columns
+     7. Legal bar
+     8. Cookie notice
+     9. Breakpoints
+    10. Reduced motion
 
    ========================================================================== */
 
@@ -50,14 +49,12 @@
   --green-ink: #5c9a2e;          /* the green that carries text and labels */
   --ink: #1f2b3e;                /* body copy */
   --muted: #5a6b82;              /* addresses, sub-lines */
-  --faint: #7d8ea1;              /* placeholders */
   --nav-ink: #3d464d;            /* the nav's link grey */
   --white: #fff;
 
   /* ---- surfaces ---- */
   --band-tint: #f2f5f9;
   --border: #e3eaf3;
-  --border-hover: #c3d6ea;
   --tint-blue: #e5edf7;          /* the panel row under the cursor */
   --sep: #c2ccdb;                /* the utility bar's separator */
 
@@ -77,7 +74,6 @@
   --shell: 73.75rem;                       /* 1180px */
   --gutter: clamp(1.375rem, 4vw, 2.5rem);  /* 22–40px */
   --logo-h: 2.5rem;                        /* 40px — the nav bar's mark */
-  --field-h: 3rem;                         /* 48px */
   --row-x: .875rem;                        /* 14px — a panel row's side padding */
   --hit: 2.75rem;                          /* 44px — a finger's worth */
 
@@ -89,7 +85,6 @@
   --step--1: .90625rem;   /* 14.5px — panel rows */
   --step-0: .9375rem;     /* 15px — nav links, addresses, fields */
   --step-1: 1rem;         /* 16px — the cookie line */
-  --step-2: 1.375rem;     /* 22px — the newsletter title */
 
   /* ---- motion ---- */
   --ease: cubic-bezier(.16, .84, .44, 1);
@@ -213,7 +208,7 @@ a { color: inherit; }
   left: 50%;
   will-change: transform;
 }
-/* green: opens top-left behind the newsletter title and runs down to the right */
+/* green: opens top-left behind the mark and runs down to the right */
 .wash__g {
   width: 63.5rem; height: 52rem;
   margin-left: -61.75rem;
@@ -221,7 +216,7 @@ a { color: inherit; }
   background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .24), rgba(128, 195, 74, 0) 100%);
   animation: washG 26s linear infinite;
 }
-/* brand blue: opens top-right behind the field and runs the other way */
+/* brand blue: opens top-right behind the contact column and runs the other way */
 .wash__b {
   width: 68rem; height: 57rem;
   margin-left: -4.75rem;
@@ -304,8 +299,6 @@ a { color: inherit; }
   background-image: linear-gradient(102deg,
     rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .08) 50%, rgba(255, 255, 255, 0) 70%);
 }
-.footer--deep .news__msg--error { color: #f2b8b5; }
-
 
 /* ==========================================================================
    5. LABEL — the panels' section heading: the brand's eyebrow, without its
@@ -332,94 +325,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   6. NEWSLETTER
-   ========================================================================== */
-.news {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.5rem 4rem;
-  align-items: center;
-  padding-block: 3.25rem 3rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.news__title {
-  font-size: var(--step-2);
-  font-weight: 700;
-  letter-spacing: -.01em;
-  line-height: 1.3;
-  color: var(--navy);
-}
-
-.news__sub {
-  margin-top: .25rem;
-  color: var(--muted);
-}
-
-.news__form {
-  justify-self: end;
-  width: min(100%, 30rem);
-}
-
-.news__row {
-  display: flex;
-  gap: .5rem;
-}
-
-.news__input {
-  flex: 1 1 auto;
-  min-width: 0;
-  height: var(--field-h);
-  padding: 0 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  font: inherit;
-  color: var(--ink);
-  background: var(--white);
-  transition: border-color .18s var(--ease);
-}
-.news__input::placeholder { color: var(--faint); }
-.news__input:hover { border-color: var(--border-hover); }
-.news__input:focus-visible { border-color: var(--navy); }
-.news__input[aria-invalid="true"] { border-color: #d0483f; }
-
-/* ---- the brand's .btn, at the nav's scale ---- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .6875rem;
-  height: var(--field-h);
-  padding-inline: 1.375rem;
-  border: 1.5px solid var(--green);
-  border-radius: var(--r);
-  background: var(--green);
-  color: var(--white);
-  font: inherit;
-  font-weight: 700;
-  line-height: 1;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
-}
-.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); filter: brightness(1.04); }
-.btn:active { transform: translateY(-1px); }
-
-.news__btn { flex: none; }
-
-.news__msg {
-  margin-top: .625rem;
-  font-size: var(--step--2);
-  font-weight: 600;
-  color: var(--green-ink);
-}
-.news__msg:empty { display: none; }
-.news__msg--error { color: #b23b3b; }
-
-
-/* ==========================================================================
-   7. COLUMNS
+   6. COLUMNS
    ========================================================================== */
 .cols {
   display: grid;
@@ -541,7 +447,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. LEGAL BAR — the utility bar, mirrored
+   7. LEGAL BAR — the utility bar, mirrored
    ========================================================================== */
 .legal {
   position: relative;          /* above the wash, which is already gone by here */
@@ -592,7 +498,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   9. COOKIE NOTICE
+   8. COOKIE NOTICE
    ========================================================================== */
 .cookie {
   position: sticky;
@@ -650,7 +556,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   10. BREAKPOINTS
+   9. BREAKPOINTS
    ========================================================================== */
 
 /* ---- tablet (768–1023): the brand becomes a row over three columns ---- */
@@ -672,12 +578,6 @@ a { color: inherit; }
 
 /* ---- phone (<768): two columns, the contact block full width ---- */
 @media (max-width: 767px) {
-  .news {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding-block: 2.75rem 2.5rem;
-  }
-  .news__form { justify-self: stretch; width: 100%; }
   .cols {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.5rem 2rem;
@@ -701,7 +601,6 @@ a { color: inherit; }
 
 /* ---- small phone (<520): one column, the button goes full width ---- */
 @media (max-width: 519px) {
-  .news__row { flex-direction: column; }
   .cols { grid-template-columns: 1fr; gap: 2.25rem; }
   .brand {
     flex-direction: column;
@@ -717,7 +616,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   11. REDUCED MOTION
+   10. REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .wash span,
@@ -725,8 +624,6 @@ a { color: inherit; }
   *,
   *::before,
   *::after { transition-duration: .001ms !important; }
-  .btn:hover,
-  .btn:active,
   .cookie__btn:hover,
   .cookie__btn:active { transform: none; }
 }

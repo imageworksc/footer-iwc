@@ -1,8 +1,8 @@
 # ImageWorks Creative — Footer
 
-The site footer on its own: the newsletter, the *Services* / *Company* /
-*Platform Expertise* menus, contact and both locations, the legal line, and
-the cookie notice that sits along the bottom of the viewport. Same copy and
+The site footer on its own: the *Services* / *Company* / *Platform
+Expertise* menus, contact and both locations, the legal line, and the
+cookie notice that sits along the bottom of the viewport. Same copy and
 structure as the footer on
 [imageworks-home](https://github.com/imageworksc/imageworks-home) — minus
 the location map — laid out clean on the design system from the
@@ -22,10 +22,10 @@ and made of its parts, turned to face the other way:
   on the left. No underlines anywhere.
 - **The legal bar** is the utility bar mirrored — the same tinted band and
   hairline, 13px at 600, links turning blue on hover.
-- **The mark** is set by height at 40px like the nav bar's, the button is
-  the brand's `.btn`, and the tokens are the nav's, verbatim.
+- **The mark** is set by height at 40px like the nav bar's, and the tokens
+  are the nav's, verbatim.
 
-Three rows, and the green spent on the labels, the hover bar and the one
+Two rows, and the green spent on the labels, the hover bar and the cookie
 button. The ground is the home's deep navy (`footer--deep`), the way the
 branding page's deep band does it: re-pointing the semantic tokens flips
 every child, so nothing inside carries its own dark variant. Blue has no
@@ -43,13 +43,12 @@ for seconds), and a sheen crossing over them every 19 s. A mask brings them
 in under the hairline and out again before the legal line. They stop under
 `prefers-reduced-motion`.
 
-1. **Newsletter** — the title and its line on the left, the field and the
-   *Subscribe* button on the right.
-2. **Columns** — the logo and social marks; *Services*; *Company* with
-   *Platform Expertise* stacked under it; and contact: the phone first as a
-   real `tel:` link, then both locations as a panel row's title over a
-   quieter line.
-3. **Legal** — the copyright left, *Sitemap* and *Privacy Policy* right.
+1. **Columns** — the logo and social marks; *Services* (with *AI Website
+   Design* pointing at the [AI web design page](https://imageworksc.github.io/ai-web-design/));
+   *Company* with *Platform Expertise* stacked under it; and contact: the
+   phone first as a real `tel:` link, then both locations as a panel row's
+   title over a quieter line.
+2. **Legal** — the copyright left, *Sitemap* and *Privacy Policy* right.
 
 ## Files
 
@@ -57,7 +56,7 @@ in under the hairline and out again before the legal line. They stop under
 | --- | --- |
 | `index.html` | The footer, the cookie notice, and an empty page body above them |
 | `styles.css` | Brand tokens, the footer, and the cookie bar |
-| `script.js` | The newsletter form's confirmation / validation, and the cookie notice's Accept |
+| `script.js` | The cookie notice's Accept |
 | `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
 | `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
@@ -69,24 +68,21 @@ Nothing is inline. No `<style>` block, no `style` attribute, no `on…`
 handler, no presentation attributes on the SVGs: the social marks are
 symbols in a sprite at the top of the body, drawn with `<use>` and coloured
 and sized from the stylesheet. The script is ES2015+ — `const`/`let`,
-arrow functions, optional chaining — in one closure with a function per
-behaviour.
+arrow functions, optional chaining — in one closure.
 
 ## Reviewing it
 
 - **Desktop (≥ 1024px)** — four columns: brand, services, company, contact.
 - **Tablet (768–1023px)** — the brand becomes a row (logo left, social marks
   right) over three columns.
-- **Phone (< 768px)** — the newsletter stacks; two columns of links with the
-  contact block full width beneath, its two locations side by side; under
-  520px everything is one column and the button goes full width.
+- **Phone (< 768px)** — two columns of links with the contact block full
+  width beneath, its two locations side by side; under 520px everything is
+  one column.
 - **4K / 5K** — every length is in `rem`, and the root font size grows with the
   viewport past 1920px (`clamp(100%, .5vw + 6.4px, 250%)`), so the footer
   scales as one piece instead of shrinking to a strip along the bottom.
   Narrower than 1920px it stays at the browser default and respects the
   user's font-size setting.
-- **Newsletter** — submit with an empty or malformed address to see the inline
-  error; a valid one shows the confirmation. Nothing is sent anywhere.
 - **Cookie notice** — sticky to the bottom of the viewport; it rides along
   while you scroll and sits below the legal line once you reach the foot of
   the page, so nothing is ever covered. *Accept* slides it away and remembers
@@ -109,9 +105,8 @@ Type is Plus Jakarta Sans, 400 / 500 / 600 / 700 / 800.
 
 ## Accessibility
 
-Landmarks (`main`, `footer`, a labelled `nav` per menu, a labelled `section`
-for the newsletter, and a labelled `region` for the cookie notice), an
-`address` element for the locations, a labelled email field with a
-live-region status line, `aria-label`s on the icon-only social links,
-visible focus rings, a real `tel:` link, 33–48px targets on everything
-tappable, and `prefers-reduced-motion` support.
+Landmarks (`main`, `footer`, a labelled `nav` per menu, and a labelled
+`region` for the cookie notice), an `address` element for the locations,
+`aria-label`s on the icon-only social links, visible focus rings, a real
+`tel:` link, 33–52px targets on everything tappable, and
+`prefers-reduced-motion` support.
