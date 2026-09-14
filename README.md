@@ -28,7 +28,8 @@ in under the hairline and out again before the legal line. They stop under
    *Subscribe* button on the right.
 2. **Columns** — the logo and social marks; *Services*; *Company* with
    *Platform Expertise* stacked under it; and contact: the phone first as a
-   real `tel:` link, then both locations.
+   real `tel:` link, then both locations. Links slide a step to the right
+   and turn brand blue on hover; nothing underlines.
 3. **Legal** — the copyright left, *Sitemap* and *Privacy Policy* right.
 
 ## Files

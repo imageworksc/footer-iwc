@@ -39,6 +39,7 @@
   /* ---- brand ---- */
   --navy: #143c66;
   --navy-deep: #0a2c4d;
+  --blue: #1266b5;               /* the brand's link blue — links turn to it on hover */
   --green: #80c34a;
   --green-deep: #6fae3c;         /* the button, pressed */
   --ink: #1f2b3e;                /* body copy */
@@ -358,7 +359,8 @@ a { color: inherit; }
 }
 .social__link svg { width: 1.25rem; height: 1.25rem; }
 .social__link--x svg { width: 1.125rem; height: 1.125rem; }
-.social__link:hover { color: var(--navy); }
+.social__link:hover,
+.social__link:focus-visible { color: var(--blue); }
 
 /* ---- lists ---- */
 .col__title {
@@ -377,18 +379,19 @@ a { color: inherit; }
 }
 .col__list li { display: flex; }
 
+/* Hover slides the link a step to the right and turns it brand blue — no
+   underline. The slide is a transform, so it composites on the GPU. */
 .col__link {
   display: inline-block;
   padding-block: .3125rem;   /* a 33px target */
   color: var(--link);
   text-decoration: none;
-  transition: color .15s ease;
+  transition: color .2s ease, transform .3s var(--ease);
 }
-.col__link:hover {
-  color: var(--navy);
-  text-decoration: underline;
-  text-underline-offset: .2em;
-  text-decoration-thickness: 1px;
+.col__link:hover,
+.col__link:focus-visible {
+  color: var(--blue);
+  transform: translateX(.375rem);
 }
 
 /* ---- contact ---- */
@@ -396,13 +399,16 @@ a { color: inherit; }
   margin-top: .5rem;
   color: var(--muted);
 }
+/* Inline in a sentence, so it changes colour without moving. */
 .call__phone {
   font-weight: 700;
   color: var(--navy);
   text-decoration: none;
   white-space: nowrap;
+  transition: color .2s ease;
 }
-.call__phone:hover { text-decoration: underline; text-underline-offset: .2em; }
+.call__phone:hover,
+.call__phone:focus-visible { color: var(--blue); }
 
 .places { margin-top: 1.75rem; }
 .place + .place { margin-top: 1.5rem; }
@@ -438,9 +444,13 @@ a { color: inherit; }
   color: var(--muted);
   text-decoration: none;
   white-space: nowrap;
-  transition: color .15s ease;
+  transition: color .2s ease, transform .3s var(--ease);
 }
-.legal__link:hover { color: var(--navy); text-decoration: underline; text-underline-offset: .2em; }
+.legal__link:hover,
+.legal__link:focus-visible {
+  color: var(--blue);
+  transform: translateX(.375rem);
+}
 
 
 /* ==========================================================================
@@ -576,8 +586,13 @@ a { color: inherit; }
   .news__btn,
   .social__link,
   .col__link,
+  .call__phone,
   .legal__link,
   .cookie,
   .cookie__link,
   .cookie__btn { transition: none; }
+  .col__link:hover,
+  .col__link:focus-visible,
+  .legal__link:hover,
+  .legal__link:focus-visible { transform: none; }
 }
