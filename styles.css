@@ -264,14 +264,14 @@ a { color: inherit; }
   50%      { background-position: -24% 0; }
 }
 
-/* ---- deep: the same footer on the home's navy ground ----
+/* ---- deep: the home's navy ground, for the footer and the cookie bar ----
    Re-pointing the semantic tokens is enough for every child to flip, the
    way the branding page's deep band does it; nothing inside needs its own
    dark variant. Blue has no contrast against navy, so the hover colour
    becomes the green, and the tinted legal band becomes a darker one. The
    washes are brighter, since the same alphas vanish on navy, and the sheen
    is quieter, since on navy it would read as a searchlight. */
-.footer--deep {
+.deep {
   --navy: #fff;
   --nav-ink: rgba(226, 238, 252, .82);
   --muted: rgba(226, 238, 252, .70);
@@ -285,10 +285,10 @@ a { color: inherit; }
   background: var(--navy-deep);
   color: #fff;
 }
-.footer--deep .wash__g { background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .30), rgba(128, 195, 74, 0) 100%); }
-.footer--deep .wash__b { background: radial-gradient(closest-side ellipse at center, rgba(46, 140, 214, .34), rgba(46, 140, 214, 0) 100%); }
-.footer--deep .wash__s { background: radial-gradient(closest-side ellipse at center, rgba(120, 190, 255, .22), rgba(120, 190, 255, 0) 100%); }
-.footer--deep .wash::after {
+.deep .wash__g { background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .30), rgba(128, 195, 74, 0) 100%); }
+.deep .wash__b { background: radial-gradient(closest-side ellipse at center, rgba(46, 140, 214, .34), rgba(46, 140, 214, 0) 100%); }
+.deep .wash__s { background: radial-gradient(closest-side ellipse at center, rgba(120, 190, 255, .22), rgba(120, 190, 255, 0) 100%); }
+.deep .wash::after {
   background-image: linear-gradient(102deg,
     rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .08) 50%, rgba(255, 255, 255, 0) 70%);
 }
@@ -496,22 +496,22 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE — a bar the width of the viewport, surfaced like a panel
-   White, the green rule along the top, the card shadow cast upward. Its
-   content sits on the footer's shell, so the copy lines up with the columns
-   and the button with the legal links. It comes up from 8px below on the
-   panel's own timings and goes back the same way.
+   8. COOKIE NOTICE — a bar the width of the viewport, on the footer's ground
+   The navy and the washes, with the green rule along the top and the shadow
+   cast upward. Its content sits on the footer's shell, so the copy lines up
+   with the columns and the button with the legal links. It comes up from
+   8px below on the panel's own timings and goes back the same way.
    ========================================================================== */
 .cookie {
   position: fixed;
   z-index: 10;
   inset-inline: 0;
   inset-block-end: 0;
+  isolation: isolate;        /* the wash paints above the ground, below the content */
+  overflow: hidden;
   padding-block: .875rem 1rem;
   border-top: 2px solid var(--green);
-  background: var(--white);
-  color: var(--ink);
-  box-shadow: 0 -1px 3px rgba(20, 40, 80, .08), 0 -14px 34px rgba(20, 40, 80, .1);
+  box-shadow: 0 -8px 24px rgba(10, 44, 77, .25);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity .18s var(--ease), transform .22s var(--ease);
@@ -519,6 +519,52 @@ a { color: inherit; }
 .cookie.is-in {
   opacity: 1;
   transform: none;
+}
+
+/* ---- the washes, cut for a low, wide bar ----
+   The same three glows, laid along the bar and drifting sideways rather
+   than up and down, since across a strip this shallow a vertical drift
+   would only read as a slow pulse. No mask: the bar's own edges do it. */
+.cookie .wash {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+.cookie .wash span { top: 50%; }
+.cookie .wash__g {
+  width: 40rem; height: 16rem;
+  margin: -8rem 0 0 -46rem;
+  animation: washBarG 26s linear infinite;
+}
+.cookie .wash__b {
+  width: 46rem; height: 18rem;
+  margin: -9rem 0 0 -2rem;
+  animation: washBarB 37s linear infinite;
+}
+.cookie .wash__s {
+  width: 50rem; height: 16rem;
+  margin: -8rem 0 0 -24rem;
+  animation: washBarS 47s linear infinite;
+}
+@keyframes washBarG {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(14%, 0, 0); }
+  50%  { transform: translate3d(4%, 0, 0); }
+  75%  { transform: translate3d(-10%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washBarB {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(-16%, 0, 0); }
+  50%  { transform: translate3d(5%, 0, 0); }
+  75%  { transform: translate3d(15%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washBarS {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(11%, 0, 0); }
+  50%  { transform: translate3d(-6%, 0, 0); }
+  75%  { transform: translate3d(-13%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 .cookie__inner {
@@ -529,15 +575,9 @@ a { color: inherit; }
   gap: .875rem 2.5rem;
 }
 
-.cookie__copy { flex: 1 1 30rem; }
-
-/* the eyebrow without its hairline: across a full-width bar it would run
-   the length of the sentence */
-.cookie__title::after { display: none; }
-
 .cookie__text {
-  margin-top: .25rem;
-  font-size: var(--step--1);
+  flex: 1 1 30rem;
+  font-size: var(--step-0);
   line-height: 1.5;
 }
 
@@ -549,7 +589,7 @@ a { color: inherit; }
   transition: color .18s var(--ease);
 }
 .cookie__link:hover,
-.cookie__link:focus-visible { color: var(--blue); }
+.cookie__link:focus-visible { color: var(--navy); }
 
 /* The nav's button: it stays put and only changes colour. */
 .cookie__btn {
@@ -633,6 +673,7 @@ a { color: inherit; }
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .wash span,
+  .cookie .wash span,   /* outranks the bar's own placement rules */
   .wash::after { animation: none; }
   *,
   *::before,

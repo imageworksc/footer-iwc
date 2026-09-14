@@ -22,24 +22,25 @@ and made of its parts, turned to face the other way:
   on the left. No underlines anywhere.
 - **The legal bar** is the utility bar mirrored — the same tinted band and
   hairline, 13px at 600, links turning blue on hover.
-- **The cookie notice** is a bar the width of the viewport, surfaced like a
-  dropdown panel — white, the green rule along the top, the card shadow,
-  the eyebrow as its heading — coming up from 8px below on the panel's own
-  timings. Its content sits on the footer's shell, so the copy lines up
-  with the columns and *Accept* with the legal links.
+- **The cookie notice** is a bar the width of the viewport on the footer's
+  own ground — the navy and the washes, laid sideways for a strip this low —
+  with the green rule along the top, coming up from 8px below on the
+  panels' timings. Its content sits on the footer's shell, so the copy lines
+  up with the columns and *Accept* with the legal links.
 - **The mark** is set by height at 40px like the nav bar's, and the tokens
   are the nav's, verbatim.
 
 Two rows, and the green spent on the labels, the hover bar and the cookie
-button. The ground is the home's deep navy (`footer--deep`), the way the
-branding page's deep band does it: re-pointing the semantic tokens flips
-every child, so nothing inside carries its own dark variant. Blue has no
+button. The ground is the home's deep navy (`deep`, shared by the footer
+and the cookie bar), the way the branding page's deep band does it:
+re-pointing the semantic tokens flips every child, so nothing inside
+carries its own dark variant. Blue has no
 contrast against navy, so hovers turn green there; the legal band darkens
 instead of tinting; the washes are brighter and the sheen quieter.
 
-To run it on white instead, drop `footer--deep` from the `<footer>` and
-point the mark at `assets/logo.png` (the colour one) instead of
-`assets/logo-white.png`.
+To run it on white instead, drop `deep` from the `<footer>` (and from the
+cookie bar, if it should follow) and point the mark at `assets/logo.png`
+(the colour one) instead of `assets/logo-white.png`.
 
 Behind it, the branding page's hero washes: three pale ellipses of brand
 colour (green, brand blue, sky), each drifting up and down on its own clock
