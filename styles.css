@@ -447,10 +447,6 @@ a { color: inherit; }
   position: relative;          /* above the wash, which is already gone by here */
   background: var(--band-tint);
   border-top: 1px solid var(--border);
-  /* room for the cookie panel while it is up, set by script.js, so it never
-     covers the line once you reach the foot of the page */
-  padding-bottom: var(--cookie-dock, 0px);
-  transition: padding-bottom .22s var(--ease);
 }
 
 .legal__inner {
@@ -498,8 +494,10 @@ a { color: inherit; }
 /* ==========================================================================
    8. COOKIE NOTICE — a card floating in the bottom-left corner
    On the footer's navy, with the deep theme's hairline round it, the green
-   rule along the top and a shadow that lifts it off the ground. It comes up
-   from 8px below on the panels' timings and goes back the same way.
+   rule along the top and a shadow that lifts it off the ground. It floats
+   over whatever is beneath it, the legal line included. It comes up from
+   8px below on the panels' timings and goes back the same way, and under
+   the cursor it lifts a step further, the way the brand's buttons do.
    ========================================================================== */
 .cookie {
   position: fixed;
@@ -514,11 +512,16 @@ a { color: inherit; }
   box-shadow: 0 2px 4px rgba(10, 44, 77, .2), 0 18px 40px rgba(10, 44, 77, .35);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity .18s var(--ease), transform .22s var(--ease);
+  transition: opacity .18s var(--ease), transform .25s var(--ease), box-shadow .25s ease;
 }
 .cookie.is-in {
   opacity: 1;
   transform: none;
+}
+.cookie.is-in:hover,
+.cookie.is-in:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(10, 44, 77, .24), 0 26px 52px rgba(10, 44, 77, .42);
 }
 
 .cookie__inner {
@@ -629,4 +632,6 @@ a { color: inherit; }
   *,
   *::before,
   *::after { transition-duration: .001ms !important; }
+  .cookie.is-in:hover,
+  .cookie.is-in:focus-within { transform: none; }
 }

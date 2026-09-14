@@ -24,7 +24,8 @@ and made of its parts, turned to face the other way:
   hairline, 13px at 600, links turning blue on hover.
 - **The cookie notice** is a card floating in the bottom-left corner on
   the footer's navy, with the deep theme's hairline round it and the green
-  rule along the top, coming up from 8px below on the panels' timings.
+  rule along the top, coming up from 8px below on the panels' timings and
+  lifting a step further under the cursor, the way the brand's buttons do.
 - **The mark** is set by height at 40px like the nav bar's, and the tokens
   are the nav's, verbatim.
 
@@ -60,7 +61,7 @@ in under the hairline and out again before the legal line. They stop under
 | --- | --- |
 | `index.html` | The footer, the cookie panel, and an empty page body above them |
 | `styles.css` | Brand tokens, the footer, and the cookie panel |
-| `script.js` | The cookie panel: showing it, Accept, and the room the legal bar keeps for it |
+| `script.js` | The cookie card: showing it, and Accept |
 | `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
 | `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
@@ -88,10 +89,8 @@ arrow functions, optional chaining — in one closure.
   Narrower than 1920px it stays at the browser default and respects the
   user's font-size setting.
 - **Cookie notice** — a 384px card fixed in the bottom-left corner, a
-  gutter in from both edges; on phones it spans the width between the
-  gutters and *Accept* fills it under 520px. While it is up the legal bar
-  keeps room for it below its line, so it never covers the line once you
-  reach the foot of the page. *Accept* sends it
+  gutter in from both edges, floating over whatever is beneath it; on phones
+  it spans the width between the gutters and *Accept* fills it under 520px. *Accept* sends it
   back down and remembers the answer for the tab (`sessionStorage`), so a
   new tab brings it back for review. To make it stick across visits like
   the live site, change `sessionStorage` to `localStorage` in `script.js`.
