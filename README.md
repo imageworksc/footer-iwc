@@ -2,7 +2,8 @@
 
 The site footer on its own: the studio column (logo, both locations, phone,
 social), the *Services* / *Company* / *Platform Expertise* menus, the
-newsletter sign-up, and the legal line. Rebuilt from the footer on
+newsletter sign-up, the legal line, and the cookie notice that sits along
+the bottom of the viewport. Rebuilt from the footer on
 [imageworks-home](https://github.com/imageworksc/imageworks-home) with the
 same type, colours, spacing and logo — minus the location map that used to
 sit above the newsletter. Built on the design system from the
@@ -14,9 +15,9 @@ sit above the newsletter. Built on the design system from the
 
 | File | What it holds |
 | --- | --- |
-| `index.html` | The footer and an empty page body above it |
-| `styles.css` | Brand tokens and the footer components |
-| `script.js` | The newsletter form's confirmation / validation |
+| `index.html` | The footer, the cookie notice, and an empty page body above them |
+| `styles.css` | Brand tokens, the footer components, and the cookie bar |
+| `script.js` | The newsletter form's confirmation / validation, and the cookie notice's Accept |
 | `assets/footer-logo.png` | The white mark, copied from `imageworksc/imageworks-home` |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
 
@@ -36,6 +37,12 @@ folder with any static server.
   user's font-size setting.
 - **Newsletter** — submit with an empty or malformed address to see the inline
   error; a valid one shows the confirmation. Nothing is sent anywhere.
+- **Cookie notice** — sticky to the bottom of the viewport; it rides along
+  while you scroll and sits below the legal line once you reach the foot of
+  the page, so nothing is ever covered. *Accept* slides it away and remembers
+  the answer for the tab (`sessionStorage`), so a new tab brings it back for
+  review. To make it stick across visits like the live site, change
+  `sessionStorage` to `localStorage` in `script.js`.
 
 ## Design system
 
@@ -51,7 +58,8 @@ Type is Plus Jakarta Sans, 400 / 600 / 700.
 
 ## Accessibility
 
-Landmarks (`main`, `footer`, `nav`), an `address` element for the locations,
-a labelled email field with a live-region status line, `aria-label`s on the
-icon-only social and submit buttons, visible focus rings, a real `tel:` link,
-and `prefers-reduced-motion` support.
+Landmarks (`main`, `footer`, `nav`, and a labelled `region` for the cookie
+notice), an `address` element for the locations, a labelled email field with
+a live-region status line, `aria-label`s on the icon-only social and submit
+buttons, visible focus rings, a real `tel:` link, and `prefers-reduced-motion`
+support (the cookie bar disappears without the slide).
