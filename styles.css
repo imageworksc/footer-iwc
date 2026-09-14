@@ -271,7 +271,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   5. LABEL — the panels' section heading: the brand's eyebrow, with its green
+   5. LABEL — the panels' section heading: the brand's eyebrow, without its
    dot, and the hairline that finishes the rule the label starts.
    ========================================================================== */
 .col__label {
@@ -284,13 +284,6 @@ a { color: inherit; }
   letter-spacing: .16em;
   line-height: 1.3;
   text-transform: uppercase;
-}
-.col__label::before {
-  content: '';
-  flex: none;
-  width: .5rem; height: .5rem;
-  border-radius: 50%;
-  background: var(--green);
 }
 .col__label::after {
   content: '';

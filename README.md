@@ -16,7 +16,7 @@ Built to sit under the [navigation](https://imageworksc.github.io/menu-iwc/),
 and made of its parts, turned to face the other way:
 
 - **Column headings** are the dropdown panels' section labels — the brand's
-  eyebrow with its green dot, and the hairline that finishes the rule.
+  eyebrow (without its dot) and the hairline that finishes the rule.
 - **Links** are the panels' rows — the nav's grey at 600 weight; under the
   cursor they take the pale blue tint, turn navy, and a green bar slides in
   on the left. No underlines anywhere.
