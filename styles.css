@@ -2,16 +2,14 @@
    ImageWorks Creative — Footer
    ==========================================================================
 
-   The site footer on its own. One floating contact card on top — call, and
-   subscribe — then the studio beside the three menus on the brand's pale
-   band, and the legal bar along the bottom.
+   The site footer on its own: the newsletter, the columns, the legal line,
+   under a hairline on a white ground. Type does the work — navy for what
+   you read first, ink for links, muted for the rest — and the green is
+   spent on one button.
 
    The tokens are taken verbatim from the branding page so it sits in the
    same visual world as the navigation and the home:
    https://imageworksc.github.io/branding-page/
-   The contact card is that page's CTA band (the navy→blue gradient with
-   the dot field), the chips are its tinted circles, the buttons are its
-   54px buttons, and every corner is squared at 2px like everything else.
 
    Every length is in rem. The root font size stays at the browser default up
    to 1920px and then grows with the viewport, so on a 4K or 5K display the
@@ -22,13 +20,12 @@
      2. Base
      3. Ground
      4. Footer shell
-     5. Contact card
-     6. Studio column
-     7. Menus
-     8. Legal bar
-     9. Cookie notice
-    10. Breakpoints
-    11. Reduced motion
+     5. Newsletter
+     6. Columns
+     7. Legal
+     8. Cookie notice
+     9. Breakpoints
+    10. Reduced motion
 
    ========================================================================== */
 
@@ -42,53 +39,43 @@
   /* ---- brand ---- */
   --navy: #143c66;
   --navy-deep: #0a2c4d;
-  --blue: #1266b5;
   --green: #80c34a;
-  --green-ink: #5c9a2e;          /* the green that carries text on light ground */
+  --green-deep: #6fae3c;         /* the button, pressed */
   --ink: #1f2b3e;                /* body copy */
-  --muted: #5a6b82;              /* addresses, sub-lines */
+  --link: #3d464d;               /* the nav's link grey */
+  --muted: #5a6b82;              /* addresses, sub-lines, legal */
   --faint: #7d8ea1;              /* placeholders */
   --white: #fff;
 
-  /* ---- surfaces ---- */
-  --band-tint: #f2f5f9;          /* the footer's ground */
+  /* ---- lines ---- */
   --border: #e3eaf3;
   --border-hover: #c3d6ea;
-  --chip-green: #eaf6dd;
-  --cta-band: linear-gradient(135deg, #1266b5, #0a2c4d);
 
-  /* ---- on navy (the card, the legal bar, the cookie bar) ---- */
+  /* ---- on navy (the cookie bar) ---- */
   --on-navy: var(--white);
-  --on-navy-text: rgba(226, 238, 252, .82);
   --on-navy-line: rgba(255, 255, 255, .16);
 
   /* ---- shape: the brand squares its corners at 2px ---- */
   --r: 2px;
 
-  /* ---- depth ---- */
-  --shadow-card: 0 1px 3px rgba(20, 40, 80, .08), 0 14px 34px rgba(20, 40, 80, .1);
-  --shadow-float: 0 2px 4px rgba(20, 40, 80, .1), 0 24px 48px -12px rgba(10, 44, 77, .35);
-  --shadow-lift: 0 4px 12px rgba(20, 40, 80, .18);
+  /* ---- focus ---- */
   --ring: 0 0 0 3px rgba(128, 195, 74, .5), 0 0 0 1px rgba(20, 60, 102, .55);
   --ring-on-navy: 0 0 0 2px var(--navy-deep), 0 0 0 4px var(--green);
 
   /* ---- rhythm ---- */
   --shell: 73.75rem;                       /* 1180px — the brand's shell */
   --gutter: clamp(1.375rem, 4vw, 2.5rem);  /* 22–40px */
-  --overlap: 3.5rem;                       /* how far the card straddles the top edge */
-  --btn-h: 3.375rem;                       /* 54px */
-  --chip: 2.5rem;                          /* 40px */
-  --social: 2.75rem;                       /* 44px — a finger's worth */
+  --field-h: 3rem;                         /* 48px */
+  --hit: 2.75rem;                          /* 44px — a finger's worth */
 
   /* ---- type ---- */
   --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI',
           Roboto, Helvetica, Arial, sans-serif;
-  --step--2: .75rem;      /* 12px — eyebrows */
-  --step--1: .875rem;     /* 14px — legal */
-  --step-0: 1rem;         /* 16px — links, addresses, fields */
-  --step-1: 1.125rem;     /* 18px — the phone button */
-  --step-2: 1.25rem;      /* 20px — newsletter title */
-  --step-3: clamp(1.625rem, 1.25rem + 1.2vw, 2.25rem);   /* 26–36px — the card's title */
+  --step--2: .8125rem;    /* 13px — legal */
+  --step--1: .875rem;     /* 14px — column titles */
+  --step-0: .9375rem;     /* 15px — links, addresses, fields */
+  --step-1: 1rem;         /* 16px — the cookie line */
+  --step-2: 1.375rem;     /* 22px — the newsletter title */
 
   /* ---- motion ---- */
   --ease: cubic-bezier(.16, .84, .44, 1);
@@ -135,8 +122,6 @@ ul { padding: 0; list-style: none; }
 address { font-style: normal; }
 a { color: inherit; }
 
-.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -148,8 +133,6 @@ a { color: inherit; }
 }
 
 :focus-visible { outline: 0; box-shadow: var(--ring); border-radius: var(--r); }
-.contact :focus-visible,
-.legal :focus-visible,
 .cookie :focus-visible { box-shadow: var(--ring-on-navy); }
 
 .wrap {
@@ -162,295 +145,195 @@ a { color: inherit; }
 /* ==========================================================================
    3. GROUND
    ========================================================================== */
-.ground {
-  flex: 1 0 auto;
-  /* the room the card needs above the footer's edge */
-  padding-bottom: var(--overlap);
-}
+.ground { flex: 1 0 auto; }
 
 
 /* ==========================================================================
    4. FOOTER SHELL
    ========================================================================== */
 .footer {
-  background: var(--band-tint);
+  background: var(--white);
   color: var(--ink);
-}
-
-.footer__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: 3rem 4rem;
-  align-items: start;
-  padding-block: 4rem 4.5rem;
-}
-
-
-/* ---- shared: buttons ---- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .6875rem;
-  height: var(--btn-h);
-  padding-inline: 1.625rem;
-  border-radius: var(--r);
-  border: 1.5px solid transparent;
-  font: inherit;
-  font-size: var(--step-0);
-  font-weight: 700;
-  line-height: 1;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
-}
-.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-.btn:active { transform: translateY(-1px); }
-
-.btn--solid {
-  background: var(--green);
-  border-color: var(--green);
-  color: var(--white);
-}
-.btn--solid:hover { filter: brightness(1.04); }
-
-.btn__ico { flex: none; width: 1.25rem; height: 1.25rem; }
-.btn__ico--arrow { width: 1.125rem; height: 1.125rem; transition: transform .25s var(--ease); }
-.btn:hover .btn__ico--arrow { transform: translateX(4px); }
-
-
-/* ---- shared: eyebrow ---- */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .5625rem;
-  font-size: var(--step--2);
-  font-weight: 800;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--green-ink);
-}
-.eyebrow::before {
-  content: '';
-  flex: none;
-  width: .5rem; height: .5rem;
-  border-radius: 50%;
-  background: var(--green);
+  border-top: 1px solid var(--border);
 }
 
 
 /* ==========================================================================
-   5. CONTACT CARD
-   The brand's CTA band, cut to a card and floated over the footer's edge.
+   5. NEWSLETTER
    ========================================================================== */
-.contact {
-  position: relative;
-  overflow: hidden;
+.news {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  margin-top: calc(-1 * var(--overlap));
-  border-radius: var(--r);
-  background: var(--cta-band);
-  color: var(--on-navy);
-  box-shadow: var(--shadow-float);
-}
-.contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-}
-.contact > * { position: relative; }
-
-.contact__call,
-.contact__news { padding: 3rem 3.25rem; }
-.contact__call { border-right: 1px solid var(--on-navy-line); }
-
-.contact .eyebrow { color: var(--green); }
-
-.contact__title {
-  margin-top: .75rem;
-  font-size: var(--step-3);
-  font-weight: 800;
-  letter-spacing: -.018em;
-  line-height: 1.15;
-  color: var(--on-navy);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 4rem;
+  align-items: center;
+  padding-block: 3.5rem 3rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.contact__phone {
-  margin-top: 1.5rem;
-  height: 3.625rem;                /* 58px — the CTA band's primary button */
-  padding-inline: 2rem;
-  font-size: var(--step-1);
-  letter-spacing: .01em;
-  box-shadow: 0 1px 2px rgba(20, 40, 80, .14);
-}
-
-/* ---- newsletter ---- */
 .news__title {
   font-size: var(--step-2);
   font-weight: 700;
+  letter-spacing: -.01em;
   line-height: 1.3;
-  color: var(--on-navy);
+  color: var(--navy);
 }
 
 .news__sub {
-  margin-top: .5rem;
-  line-height: 1.6;
-  color: var(--on-navy-text);
+  margin-top: .375rem;
+  color: var(--muted);
 }
 
 .news__form {
+  justify-self: end;
+  width: min(100%, 30rem);
+}
+
+.news__row {
   display: flex;
-  flex-wrap: wrap;
   gap: .5rem;
-  margin-top: 1.25rem;
 }
 
 .news__input {
-  flex: 1 1 12rem;
+  flex: 1 1 auto;
   min-width: 0;
-  height: var(--btn-h);
+  height: var(--field-h);
   padding: 0 1rem;
-  border: 0;
+  border: 1px solid var(--border);
   border-radius: var(--r);
   font: inherit;
-  font-size: var(--step-0);
   color: var(--ink);
   background: var(--white);
+  transition: border-color .15s ease;
 }
 .news__input::placeholder { color: var(--faint); }
-.news__input:focus-visible { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--green); }
-.news__input[aria-invalid="true"] { box-shadow: 0 0 0 2px #e0524b; }
+.news__input:hover { border-color: var(--border-hover); }
+.news__input:focus-visible { border-color: var(--navy); box-shadow: var(--ring); }
+.news__input[aria-invalid="true"] { border-color: #d0483f; }
 
-.news__btn { flex: none; }
+.news__btn {
+  flex: none;
+  height: var(--field-h);
+  padding: 0 1.5rem;
+  border: 0;
+  border-radius: var(--r);
+  background: var(--green);
+  color: var(--white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.news__btn:hover { background: var(--green-deep); }
 
 .news__msg {
-  margin-top: .75rem;
+  margin-top: .625rem;
   font-size: var(--step--1);
   font-weight: 600;
-  color: var(--green);
+  color: #4a8628;
 }
 .news__msg:empty { display: none; }
-.news__msg--error { color: #f2b8b5; }
+.news__msg--error { color: #b23b3b; }
 
 
 /* ==========================================================================
-   6. STUDIO COLUMN
+   6. COLUMNS
    ========================================================================== */
-.studio__logo { width: 11.25rem; }   /* 180px */
-
-.locations { margin-top: 2rem; }
-
-.location {
-  display: flex;
-  align-items: flex-start;
-  gap: .875rem;
-}
-.location + .location { margin-top: 1.25rem; }
-
-.chip {
-  flex: none;
+.cols {
   display: grid;
-  place-items: center;
-  width: var(--chip); height: var(--chip);
-  border-radius: 50%;
-  background: var(--chip-green);
-  color: var(--green-ink);
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+  padding-block: 3.5rem 4rem;
 }
-.chip svg { width: 1.125rem; height: 1.125rem; }
 
-.location__body { display: block; padding-top: .375rem; }
-.location__name { display: block; font-weight: 700; color: var(--navy); }
-.location__addr { display: block; margin-top: .125rem; line-height: 1.55; color: var(--muted); }
+/* ---- brand ---- */
+.brand__logo { width: 10rem; }   /* 160px */
 
 .social {
   display: flex;
-  gap: .625rem;
-  margin-top: 2rem;
+  gap: .25rem;
+  margin: 1.5rem 0 0 -.75rem;   /* the hit area hangs left so the icon sits on the logo's edge */
 }
 
-.social__btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--social); height: var(--social);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  background: var(--white);
-  color: var(--navy);
-  text-decoration: none;
-  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
-}
-.social__btn svg { width: 1.125rem; height: 1.125rem; }
-.social__btn--x svg { width: 1rem; height: 1rem; }
-.social__btn:hover {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--white);
-}
-
-
-/* ==========================================================================
-   7. MENUS
-   ========================================================================== */
-.menus {
+.social__link {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.5rem;
-  align-items: start;
+  place-items: center;
+  width: var(--hit); height: var(--hit);
+  border-radius: var(--r);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease;
 }
+.social__link svg { width: 1.25rem; height: 1.25rem; }
+.social__link--x svg { width: 1.125rem; height: 1.125rem; }
+.social__link:hover { color: var(--navy); }
 
-.menu__list {
+/* ---- lists ---- */
+.col__title {
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--navy);
+}
+.col__title--stacked { margin-top: 1.75rem; }
+
+.col__list {
   display: flex;
   flex-direction: column;
   gap: .125rem;
-  margin-top: 1rem;
+  margin-top: .625rem;
 }
-.menu__list li { display: flex; }
+.col__list li { display: flex; }
 
-.menu__link {
-  position: relative;
+.col__link {
   display: inline-block;
-  padding-block: .3125rem;   /* a 34px target */
-  color: var(--ink);
+  padding-block: .3125rem;   /* a 33px target */
+  color: var(--link);
   text-decoration: none;
-  transition: color .2s ease;
+  transition: color .15s ease;
 }
-.menu__link::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: .0625rem;
-  height: 1.5px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s var(--ease);
+.col__link:hover {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  text-decoration-thickness: 1px;
 }
-.menu__link:hover { color: var(--blue); }
-.menu__link:hover::after,
-.menu__link:focus-visible::after { transform: scaleX(1); }
+
+/* ---- contact ---- */
+.call__line {
+  margin-top: .5rem;
+  color: var(--muted);
+}
+.call__phone {
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.call__phone:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+.places { margin-top: 1.75rem; }
+.place + .place { margin-top: 1.5rem; }
+.place__addr {
+  margin-top: .5rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
 
 
 /* ==========================================================================
-   8. LEGAL BAR
+   7. LEGAL
    ========================================================================== */
 .legal {
-  background: var(--navy-deep);
-  color: var(--on-navy-text);
-  font-size: var(--step--1);
-}
-
-.legal__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: .5rem 2rem;
-  padding-block: 1.25rem;
+  padding-block: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+  font-size: var(--step--2);
+  color: var(--muted);
 }
 
 .legal__copy { line-height: 1.55; }
@@ -460,26 +343,25 @@ a { color: inherit; }
 .legal__link {
   display: inline-block;
   padding-block: .25rem;
-  font-weight: 600;
-  color: var(--on-navy);
+  color: var(--muted);
   text-decoration: none;
   white-space: nowrap;
+  transition: color .15s ease;
 }
-.legal__link:hover { text-decoration: underline; text-underline-offset: .2em; }
+.legal__link:hover { color: var(--navy); text-decoration: underline; text-underline-offset: .2em; }
 
 
 /* ==========================================================================
-   9. COOKIE NOTICE
+   8. COOKIE NOTICE
    ========================================================================== */
 .cookie {
   position: sticky;
   bottom: 0;
   z-index: 10;
-  background: var(--navy);           /* one step lighter than the legal bar, so it reads as its own bar */
+  background: var(--navy);
   color: var(--on-navy);
   padding-block: .75rem;
-  border-top: 1px solid var(--on-navy-line);
-  box-shadow: 0 -8px 24px rgba(10, 44, 77, .22);
+  box-shadow: 0 -8px 24px rgba(10, 44, 77, .18);
   transition: transform .35s var(--ease), opacity .3s ease;
 }
 .cookie--leaving { transform: translateY(100%); opacity: 0; }
@@ -494,7 +376,7 @@ a { color: inherit; }
 
 .cookie__text {
   flex: 1 1 28rem;
-  font-size: var(--step-0);
+  font-size: var(--step-1);
   line-height: 1.5;
   text-wrap: balance;   /* when it has to wrap, split the sentence evenly rather than orphan the link */
 }
@@ -518,98 +400,90 @@ a { color: inherit; }
   background: var(--green);
   color: var(--white);
   font: inherit;
-  font-size: var(--step-2);
+  font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
+  transition: background-color .15s ease;
 }
-.cookie__btn:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lift);
-  filter: brightness(1.04);
-}
+.cookie__btn:hover { background: var(--green-deep); }
 
 
 /* ==========================================================================
-   10. BREAKPOINTS
+   9. BREAKPOINTS
    ========================================================================== */
 
-/* ---- tablet (768–1099): the studio spreads into a row, the menus take the full width ---- */
-@media (max-width: 1099px) {
-  .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
-    padding-block: 3.5rem 4rem;
+/* ---- tablet (768–1023): the brand becomes a row over three columns ---- */
+@media (max-width: 1023px) {
+  .cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 2.5rem;
   }
-  .studio {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    grid-template-areas:
-      "logo   loc"
-      "social loc";
-    gap: 1.75rem 3rem;
-    align-items: start;
-    align-content: start;
+  .brand {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-bottom: .5rem;
   }
-  .studio__logo { grid-area: logo; }
-  .locations    { grid-area: loc; margin-top: 0; }
-  .social       { grid-area: social; margin-top: 0; }
-  .contact__call,
-  .contact__news { padding: 2.5rem 2.25rem; }
+  .social { margin: 0 -.75rem 0 0; }
 }
 
-/* ---- phone (<768): everything stacks ---- */
+/* ---- phone (<768): two columns, the contact block full width ---- */
 @media (max-width: 767px) {
-  :root { --overlap: 2.5rem; }
-  .contact { grid-template-columns: 1fr; }
-  .contact__call {
-    border-right: 0;
-    border-bottom: 1px solid var(--on-navy-line);
-  }
-  .contact__call,
-  .contact__news { padding: 2rem 1.5rem; }
-  .studio {
+  .news {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "logo"
-      "loc"
-      "social";
-    gap: 1.75rem;
+    gap: 1.25rem;
+    padding-block: 3rem 2.5rem;
   }
-  .menus { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-  .legal__inner {
+  .news__form { justify-self: stretch; width: 100%; }
+  .cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+    padding-block: 3rem 3.5rem;
+  }
+  .col--contact { grid-column: 1 / -1; }
+  .places {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+  }
+  .place + .place { margin-top: 0; }
+  .legal {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
     gap: .25rem;
   }
 }
 
-/* ---- small phone (<520): the menu columns stack, the buttons go full width ---- */
+/* ---- small phone (<520): one column, the buttons go full width ---- */
 @media (max-width: 519px) {
-  .contact__phone { width: 100%; }
-  .news__input { flex-basis: 100%; }
-  .news__btn { flex: 1 1 100%; }
-  .menus { grid-template-columns: 1fr; }
+  .news__row { flex-direction: column; }
+  .cols { grid-template-columns: 1fr; gap: 2.25rem; }
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+  }
+  .social { margin: 0 0 0 -.75rem; }
+  .places { grid-template-columns: 1fr; }
+  .place + .place { margin-top: 0; }
   .cookie { padding-block: 1rem; }
-  .cookie__text { font-size: var(--step--1); }
-  .cookie__btn { width: 100%; height: 3rem; font-size: var(--step-1); }
+  .cookie__text { font-size: var(--step-0); }
+  .cookie__btn { width: 100%; height: 3rem; font-size: 1.125rem; }
 }
 
 
 /* ==========================================================================
-   11. REDUCED MOTION
+   10. REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .btn,
-  .btn__ico--arrow,
-  .menu__link,
-  .menu__link::after,
-  .social__btn,
+  .news__input,
+  .news__btn,
+  .social__link,
+  .col__link,
+  .legal__link,
   .cookie,
   .cookie__link,
   .cookie__btn { transition: none; }
-  .btn:hover,
-  .btn:active,
-  .cookie__btn:hover { transform: none; }
-  .btn:hover .btn__ico--arrow { transform: none; }
 }
