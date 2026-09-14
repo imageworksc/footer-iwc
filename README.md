@@ -12,10 +12,21 @@ the location map — laid out clean on the design system from the
 
 ## The design
 
-White ground under a hairline, three rows, and type doing the work: navy for
-what you read first (titles, the phone), the nav's grey for links, muted for
-addresses and legal. The green is spent on one button. No panels, no icons
-in boxes — the social marks sit bare under the logo.
+Built to sit under the [navigation](https://imageworksc.github.io/menu-iwc/),
+and made of its parts, turned to face the other way:
+
+- **Column headings** are the dropdown panels' section labels — the brand's
+  eyebrow with its green dot, and the hairline that finishes the rule.
+- **Links** are the panels' rows — the nav's grey at 600 weight; under the
+  cursor they take the pale blue tint, turn navy, and a green bar slides in
+  on the left. No underlines anywhere.
+- **The legal bar** is the utility bar mirrored — the same tinted band and
+  hairline, 13px at 600, links turning blue on hover.
+- **The mark** is set by height at 40px like the nav bar's, the button is
+  the brand's `.btn`, and the tokens are the nav's, verbatim.
+
+White ground under a hairline, three rows, and the green spent on the
+labels, the hover bar and the one button.
 
 Behind it, the branding page's hero washes: three pale ellipses of brand
 colour (green, brand blue, sky), each drifting up and down on its own clock
@@ -28,8 +39,8 @@ in under the hairline and out again before the legal line. They stop under
    *Subscribe* button on the right.
 2. **Columns** — the logo and social marks; *Services*; *Company* with
    *Platform Expertise* stacked under it; and contact: the phone first as a
-   real `tel:` link, then both locations. Links slide a step to the right
-   and turn brand blue on hover; nothing underlines.
+   real `tel:` link, then both locations as a panel row's title over a
+   quieter line.
 3. **Legal** — the copyright left, *Sitemap* and *Privacy Policy* right.
 
 ## Files
@@ -73,11 +84,12 @@ Colour, spacing, radii and easing are the branding page's variables,
 redeclared at the top of `styles.css`:
 
 ```
---navy #143c66   --green #80c34a   --ink #1f2b3e   --link #3d464d   --muted #5a6b82
---border #e3eaf3 --r 2px           --shell 1180px  --ease cubic-bezier(.16,.84,.44,1)
+--navy #143c66      --blue #1266b5      --green #80c34a    --green-ink #5c9a2e
+--nav-ink #3d464d   --muted #5a6b82     --tint-blue #e5edf7  --band-tint #f2f5f9
+--border #e3eaf3    --r 2px             --shell 1180px       --ease cubic-bezier(.16,.84,.44,1)
 ```
 
-Type is Plus Jakarta Sans, 400 / 500 / 600 / 700.
+Type is Plus Jakarta Sans, 400 / 500 / 600 / 700 / 800.
 
 ## Accessibility
 

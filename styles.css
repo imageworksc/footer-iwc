@@ -2,14 +2,19 @@
    ImageWorks Creative — Footer
    ==========================================================================
 
-   The site footer on its own: the newsletter, the columns, the legal line,
-   under a hairline on a white ground. Type does the work — navy for what
-   you read first, ink for links, muted for the rest — and the green is
-   spent on one button.
+   The site footer on its own, built to sit under the navigation:
+   https://imageworksc.github.io/menu-iwc/
 
-   The tokens are taken verbatim from the branding page so it sits in the
-   same visual world as the navigation and the home:
+   It borrows the nav's vocabulary and turns it to face the other way. The
+   dropdown panels' section labels (the eyebrow with its green dot and the
+   hairline that finishes the rule) head the columns; the panels' rows (grey,
+   600 weight, a green bar sliding in on the left under the cursor over a
+   pale blue tint) are the links; and the utility bar that opens the page
+   comes back as the legal bar that closes it. The tokens are the same ones,
+   taken from the branding page:
    https://imageworksc.github.io/branding-page/
+
+   Behind it all, that page's hero washes.
 
    Every length is in rem. The root font size stays at the browser default up
    to 1920px and then grows with the viewport, so on a 4K or 5K display the
@@ -19,19 +24,20 @@
      1. Tokens
      2. Base
      3. Ground
-     4. Footer shell
-     5. Newsletter
-     6. Columns
-     7. Legal
-     8. Cookie notice
-     9. Breakpoints
-    10. Reduced motion
+     4. Footer shell and the wash
+     5. Label — the panels' section heading
+     6. Newsletter
+     7. Columns
+     8. Legal bar
+     9. Cookie notice
+    10. Breakpoints
+    11. Reduced motion
 
    ========================================================================== */
 
 
 /* ==========================================================================
-   1. TOKENS
+   1. TOKENS — the nav's, verbatim, in rem where it had px
    ========================================================================== */
 :root {
   color-scheme: light;
@@ -39,18 +45,21 @@
   /* ---- brand ---- */
   --navy: #143c66;
   --navy-deep: #0a2c4d;
-  --blue: #1266b5;               /* the brand's link blue — links turn to it on hover */
+  --blue: #1266b5;
   --green: #80c34a;
-  --green-deep: #6fae3c;         /* the button, pressed */
+  --green-ink: #5c9a2e;          /* the green that carries text and labels */
   --ink: #1f2b3e;                /* body copy */
-  --link: #3d464d;               /* the nav's link grey */
-  --muted: #5a6b82;              /* addresses, sub-lines, legal */
+  --muted: #5a6b82;              /* addresses, sub-lines */
   --faint: #7d8ea1;              /* placeholders */
+  --nav-ink: #3d464d;            /* the nav's link grey */
   --white: #fff;
 
-  /* ---- lines ---- */
+  /* ---- surfaces ---- */
+  --band-tint: #f2f5f9;
   --border: #e3eaf3;
   --border-hover: #c3d6ea;
+  --tint-blue: #e5edf7;          /* the panel row under the cursor */
+  --sep: #c2ccdb;                /* the utility bar's separator */
 
   /* ---- on navy (the cookie bar) ---- */
   --on-navy: var(--white);
@@ -59,22 +68,26 @@
   /* ---- shape: the brand squares its corners at 2px ---- */
   --r: 2px;
 
-  /* ---- focus ---- */
+  /* ---- depth ---- */
+  --shadow-lift: 0 4px 12px rgba(20, 40, 80, .18);
   --ring: 0 0 0 3px rgba(128, 195, 74, .5), 0 0 0 1px rgba(20, 60, 102, .55);
   --ring-on-navy: 0 0 0 2px var(--navy-deep), 0 0 0 4px var(--green);
 
   /* ---- rhythm ---- */
-  --shell: 73.75rem;                       /* 1180px — the brand's shell */
+  --shell: 73.75rem;                       /* 1180px */
   --gutter: clamp(1.375rem, 4vw, 2.5rem);  /* 22–40px */
+  --logo-h: 2.5rem;                        /* 40px — the nav bar's mark */
   --field-h: 3rem;                         /* 48px */
+  --row-x: .875rem;                        /* 14px — a panel row's side padding */
   --hit: 2.75rem;                          /* 44px — a finger's worth */
 
   /* ---- type ---- */
   --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI',
           Roboto, Helvetica, Arial, sans-serif;
-  --step--2: .8125rem;    /* 13px — legal */
-  --step--1: .875rem;     /* 14px — column titles */
-  --step-0: .9375rem;     /* 15px — links, addresses, fields */
+  --step--3: .75rem;      /* 12px — labels */
+  --step--2: .8125rem;    /* 13px — the utility / legal bar */
+  --step--1: .90625rem;   /* 14.5px — panel rows */
+  --step-0: .9375rem;     /* 15px — nav links, addresses, fields */
   --step-1: 1rem;         /* 16px — the cookie line */
   --step-2: 1.375rem;     /* 22px — the newsletter title */
 
@@ -107,7 +120,7 @@ body {
   font-family: var(--font);
   font-size: var(--step-0);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.65;
   color: var(--ink);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
@@ -116,8 +129,9 @@ body {
   overflow-x: clip;
 }
 
-img { max-width: 100%; height: auto; display: block; }
-svg { display: block; }
+::selection { background: rgba(128, 195, 74, .28); }
+
+img, svg { display: block; max-width: 100%; }
 h2, p, ul, address { margin: 0; }
 ul { padding: 0; list-style: none; }
 address { font-style: normal; }
@@ -133,10 +147,15 @@ a { color: inherit; }
   border: 0;
 }
 
-:focus-visible { outline: 0; box-shadow: var(--ring); border-radius: var(--r); }
-.cookie :focus-visible { box-shadow: var(--ring-on-navy); }
+:where(a, button, input):focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--r);
+}
+.cookie :where(a, button):focus-visible { box-shadow: var(--ring-on-navy); }
 
 .wrap {
+  width: 100%;
   max-width: var(--shell);
   margin-inline: auto;
   padding-inline: var(--gutter);
@@ -150,7 +169,7 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   4. FOOTER SHELL
+   4. FOOTER SHELL AND THE WASH
    ========================================================================== */
 .footer {
   position: relative;
@@ -172,7 +191,7 @@ a { color: inherit; }
    decoration.
 
    The mask brings them in under the hairline and takes them out again before
-   the legal line, so both edges sit on flat white. */
+   the legal bar, so both edges sit on flat ground. */
 .wash {
   position: absolute;
   inset: 0;
@@ -252,14 +271,45 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   5. NEWSLETTER
+   5. LABEL — the panels' section heading: the brand's eyebrow, with its green
+   dot, and the hairline that finishes the rule the label starts.
+   ========================================================================== */
+.col__label {
+  display: flex;
+  align-items: center;
+  gap: .5625rem;
+  color: var(--green-ink);
+  font-size: var(--step--3);
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.col__label::before {
+  content: '';
+  flex: none;
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  background: var(--green);
+}
+.col__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.col__label--next { margin-top: 1.5rem; }
+
+
+/* ==========================================================================
+   6. NEWSLETTER
    ========================================================================== */
 .news {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.5rem 4rem;
   align-items: center;
-  padding-block: 3.5rem 3rem;
+  padding-block: 3.25rem 3rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -272,7 +322,7 @@ a { color: inherit; }
 }
 
 .news__sub {
-  margin-top: .375rem;
+  margin-top: .25rem;
   color: var(--muted);
 }
 
@@ -296,56 +346,71 @@ a { color: inherit; }
   font: inherit;
   color: var(--ink);
   background: var(--white);
-  transition: border-color .15s ease;
+  transition: border-color .18s var(--ease);
 }
 .news__input::placeholder { color: var(--faint); }
 .news__input:hover { border-color: var(--border-hover); }
-.news__input:focus-visible { border-color: var(--navy); box-shadow: var(--ring); }
+.news__input:focus-visible { border-color: var(--navy); }
 .news__input[aria-invalid="true"] { border-color: #d0483f; }
 
-.news__btn {
-  flex: none;
+/* ---- the brand's .btn, at the nav's scale ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6875rem;
   height: var(--field-h);
-  padding: 0 1.5rem;
-  border: 0;
+  padding-inline: 1.375rem;
+  border: 1.5px solid var(--green);
   border-radius: var(--r);
   background: var(--green);
   color: var(--white);
   font: inherit;
   font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color .15s ease;
+  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
 }
-.news__btn:hover { background: var(--green-deep); }
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); filter: brightness(1.04); }
+.btn:active { transform: translateY(-1px); }
+
+.news__btn { flex: none; }
 
 .news__msg {
   margin-top: .625rem;
-  font-size: var(--step--1);
+  font-size: var(--step--2);
   font-weight: 600;
-  color: #4a8628;
+  color: var(--green-ink);
 }
 .news__msg:empty { display: none; }
 .news__msg--error { color: #b23b3b; }
 
 
 /* ==========================================================================
-   6. COLUMNS
+   7. COLUMNS
    ========================================================================== */
 .cols {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.3fr 1fr 1fr 1.15fr;
   gap: 3rem;
   align-items: start;
-  padding-block: 3.5rem 4rem;
+  padding-block: 3.25rem 3.75rem;
 }
 
 /* ---- brand ---- */
-.brand__logo { width: 10rem; }   /* 160px */
+/* Height-driven like the nav's mark: the width follows so it can never be
+   squashed. */
+.brand__logo {
+  height: var(--logo-h);
+  width: auto;
+}
 
 .social {
   display: flex;
   gap: .25rem;
-  margin: 1.5rem 0 0 -.75rem;   /* the hit area hangs left so the icon sits on the logo's edge */
+  margin: 1.25rem 0 0 -.75rem;   /* the hit area hangs left so the icon sits on the logo's edge */
 }
 
 .social__link {
@@ -353,108 +418,146 @@ a { color: inherit; }
   place-items: center;
   width: var(--hit); height: var(--hit);
   border-radius: var(--r);
-  color: var(--muted);
+  color: var(--nav-ink);
   text-decoration: none;
-  transition: color .15s ease;
+  transition: color .18s var(--ease);
 }
 .social__link svg { width: 1.25rem; height: 1.25rem; }
 .social__link--x svg { width: 1.125rem; height: 1.125rem; }
 .social__link:hover,
 .social__link:focus-visible { color: var(--blue); }
 
-/* ---- lists ---- */
-.col__title {
-  font-size: var(--step--1);
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--navy);
-}
-.col__title--stacked { margin-top: 1.75rem; }
-
+/* ---- rows: the dropdown panel's rows ----
+   The list hangs one row-padding to the left, so the text lines up with the
+   label above it and the tint under the cursor reaches out past it, the way
+   a panel row reaches to the panel's edge. */
 .col__list {
   display: flex;
   flex-direction: column;
   gap: .125rem;
-  margin-top: .625rem;
+  margin: .5rem 0 0 calc(-1 * var(--row-x));
 }
-.col__list li { display: flex; }
 
-/* Hover slides the link a step to the right and turns it brand blue — no
-   underline. The slide is a transform, so it composites on the GPU. */
 .col__link {
-  display: inline-block;
-  padding-block: .3125rem;   /* a 33px target */
-  color: var(--link);
+  position: relative;
+  display: block;
+  padding: .5rem var(--row-x);
+  border-radius: var(--r);
+  color: var(--nav-ink);
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.35;
   text-decoration: none;
-  transition: color .2s ease, transform .3s var(--ease);
+  transition: background-color .16s var(--ease), color .16s var(--ease);
+}
+/* the same rule that grows under the nav's links, turned on its side */
+.col__link::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  width: 3px;
+  height: 68%;
+  background: var(--green);
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center;
+  transition: transform .22s var(--ease);
 }
 .col__link:hover,
 .col__link:focus-visible {
-  color: var(--blue);
-  transform: translateX(.375rem);
+  background: var(--tint-blue);
+  color: var(--navy);
 }
+.col__link:hover::before,
+.col__link:focus-visible::before { transform: translateY(-50%) scaleY(1); }
 
 /* ---- contact ---- */
-.call__line {
-  margin-top: .5rem;
+.col__text {
+  margin-top: .625rem;
+  line-height: 1.6;
   color: var(--muted);
 }
-/* Inline in a sentence, so it changes colour without moving. */
-.call__phone {
-  font-weight: 700;
+/* Inline in a sentence, so it changes colour the way the utility bar's
+   items do, without moving. */
+.col__phone {
+  font-weight: 800;
   color: var(--navy);
   text-decoration: none;
   white-space: nowrap;
-  transition: color .2s ease;
+  transition: color .18s var(--ease);
 }
-.call__phone:hover,
-.call__phone:focus-visible { color: var(--blue); }
+.col__phone:hover,
+.col__phone:focus-visible { color: var(--blue); }
 
-.places { margin-top: 1.75rem; }
-.place + .place { margin-top: 1.5rem; }
+/* The locations take the panel row's shape — a 600-weight title over a
+   quieter line — rather than the label's, which runs too long in capitals. */
+.place { margin-top: 1.375rem; }
+.place__name {
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--navy);
+}
 .place__addr {
-  margin-top: .5rem;
+  margin-top: .25rem;
   line-height: 1.6;
   color: var(--muted);
 }
 
 
 /* ==========================================================================
-   7. LEGAL
+   8. LEGAL BAR — the utility bar, mirrored
    ========================================================================== */
 .legal {
+  position: relative;          /* above the wash, which is already gone by here */
+  background: var(--band-tint);
+  border-top: 1px solid var(--border);
+}
+
+.legal__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem 2rem;
-  padding-block: 1.5rem 2rem;
-  border-top: 1px solid var(--border);
+  gap: .375rem 1.125rem;
+  padding-block: .75rem;
   font-size: var(--step--2);
+  color: var(--nav-ink);
+}
+
+.legal__copy {
+  font-weight: 500;
+  line-height: 1.55;
   color: var(--muted);
 }
 
-.legal__copy { line-height: 1.55; }
-
-.legal__links { display: flex; gap: 1.5rem; }
+.legal__links {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+}
 
 .legal__link {
   display: inline-block;
-  padding-block: .25rem;
-  color: var(--muted);
+  padding-block: .375rem;
+  border-radius: var(--r);
+  color: var(--nav-ink);
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: color .2s ease, transform .3s var(--ease);
+  transition: color .18s var(--ease);
 }
 .legal__link:hover,
-.legal__link:focus-visible {
-  color: var(--blue);
-  transform: translateX(.375rem);
+.legal__link:focus-visible { color: var(--blue); }
+
+.legal__sep {
+  color: var(--sep);
+  user-select: none;
 }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE
+   9. COOKIE NOTICE
    ========================================================================== */
 .cookie {
   position: sticky;
@@ -505,13 +608,14 @@ a { color: inherit; }
   font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color .15s ease;
+  transition: transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
 }
-.cookie__btn:hover { background: var(--green-deep); }
+.cookie__btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); filter: brightness(1.04); }
+.cookie__btn:active { transform: translateY(-1px); }
 
 
 /* ==========================================================================
-   9. BREAKPOINTS
+   10. BREAKPOINTS
    ========================================================================== */
 
 /* ---- tablet (768–1023): the brand becomes a row over three columns ---- */
@@ -526,7 +630,7 @@ a { color: inherit; }
     align-items: center;
     justify-content: space-between;
     gap: 1rem 2rem;
-    padding-bottom: .5rem;
+    padding-bottom: .25rem;
   }
   .social { margin: 0 -.75rem 0 0; }
 }
@@ -536,29 +640,31 @@ a { color: inherit; }
   .news {
     grid-template-columns: 1fr;
     gap: 1.25rem;
-    padding-block: 3rem 2.5rem;
+    padding-block: 2.75rem 2.5rem;
   }
   .news__form { justify-self: stretch; width: 100%; }
   .cols {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.5rem 2rem;
-    padding-block: 3rem 3.5rem;
+    padding-block: 2.75rem 3.25rem;
   }
-  .col--contact { grid-column: 1 / -1; }
-  .places {
+  .col--contact {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem 2rem;
+    gap: 0 2rem;
   }
-  .place + .place { margin-top: 0; }
-  .legal {
+  /* the phone spans the row; the two locations sit side by side under it */
+  .col--contact > :nth-child(-n + 2) { grid-column: 1 / -1; }
+  .legal__inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: .25rem;
+    gap: .125rem;
+    padding-block: .875rem;
   }
 }
 
-/* ---- small phone (<520): one column, the buttons go full width ---- */
+/* ---- small phone (<520): one column, the button goes full width ---- */
 @media (max-width: 519px) {
   .news__row { flex-direction: column; }
   .cols { grid-template-columns: 1fr; gap: 2.25rem; }
@@ -568,8 +674,7 @@ a { color: inherit; }
     gap: .75rem;
   }
   .social { margin: 0 0 0 -.75rem; }
-  .places { grid-template-columns: 1fr; }
-  .place + .place { margin-top: 0; }
+  .col--contact { grid-template-columns: 1fr; }
   .cookie { padding-block: 1rem; }
   .cookie__text { font-size: var(--step-0); }
   .cookie__btn { width: 100%; height: 3rem; font-size: 1.125rem; }
@@ -577,22 +682,16 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   10. REDUCED MOTION
+   11. REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .wash span,
   .wash::after { animation: none; }
-  .news__input,
-  .news__btn,
-  .social__link,
-  .col__link,
-  .call__phone,
-  .legal__link,
-  .cookie,
-  .cookie__link,
-  .cookie__btn { transition: none; }
-  .col__link:hover,
-  .col__link:focus-visible,
-  .legal__link:hover,
-  .legal__link:focus-visible { transform: none; }
+  *,
+  *::before,
+  *::after { transition-duration: .001ms !important; }
+  .btn:hover,
+  .btn:active,
+  .cookie__btn:hover,
+  .cookie__btn:active { transform: none; }
 }
