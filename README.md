@@ -25,8 +25,16 @@ and made of its parts, turned to face the other way:
 - **The mark** is set by height at 40px like the nav bar's, the button is
   the brand's `.btn`, and the tokens are the nav's, verbatim.
 
-White ground under a hairline, three rows, and the green spent on the
-labels, the hover bar and the one button.
+Three rows, and the green spent on the labels, the hover bar and the one
+button. The ground is the home's deep navy (`footer--deep`), the way the
+branding page's deep band does it: re-pointing the semantic tokens flips
+every child, so nothing inside carries its own dark variant. Blue has no
+contrast against navy, so hovers turn green there; the legal band darkens
+instead of tinting; the washes are brighter and the sheen quieter.
+
+To run it on white instead, drop `footer--deep` from the `<footer>` and
+point the mark at `assets/logo.png` (the colour one) instead of
+`assets/logo-white.png`.
 
 Behind it, the branding page's hero washes: three pale ellipses of brand
 colour (green, brand blue, sky), each drifting up and down on its own clock
@@ -50,7 +58,8 @@ in under the hairline and out again before the legal line. They stop under
 | `index.html` | The footer, the cookie notice, and an empty page body above them |
 | `styles.css` | Brand tokens, the footer, and the cookie bar |
 | `script.js` | The newsletter form's confirmation / validation, and the cookie notice's Accept |
-| `assets/logo.png` | The colour mark, copied from `imageworksc/imageworks-home` |
+| `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
+| `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
 
 No build step and no dependencies. Open `index.html` directly, or serve the

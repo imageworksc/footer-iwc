@@ -269,6 +269,36 @@ a { color: inherit; }
   50%      { background-position: -24% 0; }
 }
 
+/* ---- deep: the same footer on the home's navy ground ----
+   Re-pointing the semantic tokens is enough for every child to flip, the
+   way the branding page's deep band does it; nothing inside needs its own
+   dark variant. Blue has no contrast against navy, so the hover colour
+   becomes the green, and the tinted legal band becomes a darker one. The
+   washes are brighter, since the same alphas vanish on navy, and the sheen
+   is quieter, since on navy it would read as a searchlight. */
+.footer--deep {
+  --navy: #fff;
+  --nav-ink: rgba(226, 238, 252, .82);
+  --muted: rgba(226, 238, 252, .70);
+  --border: rgba(255, 255, 255, .16);
+  --green-ink: var(--green);
+  --blue: var(--green);
+  --tint-blue: rgba(255, 255, 255, .08);
+  --band-tint: rgba(0, 0, 0, .18);
+  --sep: rgba(255, 255, 255, .28);
+  --ring: var(--ring-on-navy);
+  background: var(--navy-deep);
+  color: #fff;
+}
+.footer--deep .wash__g { background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .30), rgba(128, 195, 74, 0) 100%); }
+.footer--deep .wash__b { background: radial-gradient(closest-side ellipse at center, rgba(46, 140, 214, .34), rgba(46, 140, 214, 0) 100%); }
+.footer--deep .wash__s { background: radial-gradient(closest-side ellipse at center, rgba(120, 190, 255, .22), rgba(120, 190, 255, 0) 100%); }
+.footer--deep .wash::after {
+  background-image: linear-gradient(102deg,
+    rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .08) 50%, rgba(255, 255, 255, 0) 70%);
+}
+.footer--deep .news__msg--error { color: #f2b8b5; }
+
 
 /* ==========================================================================
    5. LABEL — the panels' section heading: the brand's eyebrow, without its
