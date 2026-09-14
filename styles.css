@@ -62,7 +62,6 @@
   --r: 2px;
 
   /* ---- depth ---- */
-  --shadow-card: 0 1px 3px rgba(20, 40, 80, .08), 0 14px 34px rgba(20, 40, 80, .1);
   --ring: 0 0 0 3px rgba(128, 195, 74, .5), 0 0 0 1px rgba(20, 60, 102, .55);
   --ring-on-navy: 0 0 0 2px var(--navy-deep), 0 0 0 4px var(--green);
 
@@ -497,24 +496,22 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE — a panel, the way the nav's dropdowns are panels
-   White, a hairline border, the green rule along the top, the card shadow.
-   It comes up from 8px below on the panel's own timings and goes back the
-   same way. On the content's left edge, so it lines up with the columns.
+   8. COOKIE NOTICE — a bar the width of the viewport, surfaced like a panel
+   White, the green rule along the top, the card shadow cast upward. Its
+   content sits on the footer's shell, so the copy lines up with the columns
+   and the button with the legal links. It comes up from 8px below on the
+   panel's own timings and goes back the same way.
    ========================================================================== */
 .cookie {
   position: fixed;
   z-index: 10;
-  inset-block-end: var(--gutter);
-  inset-inline-start: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
-  width: min(24rem, calc(100% - 2 * var(--gutter)));
-  padding: 1rem 1.25rem 1.25rem;
-  border: 1px solid var(--border);
+  inset-inline: 0;
+  inset-block-end: 0;
+  padding-block: .875rem 1rem;
   border-top: 2px solid var(--green);
-  border-radius: var(--r);
   background: var(--white);
   color: var(--ink);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 -1px 3px rgba(20, 40, 80, .08), 0 -14px 34px rgba(20, 40, 80, .1);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity .18s var(--ease), transform .22s var(--ease);
@@ -524,10 +521,24 @@ a { color: inherit; }
   transform: none;
 }
 
+.cookie__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .875rem 2.5rem;
+}
+
+.cookie__copy { flex: 1 1 30rem; }
+
+/* the eyebrow without its hairline: across a full-width bar it would run
+   the length of the sentence */
+.cookie__title::after { display: none; }
+
 .cookie__text {
-  margin-top: .625rem;
+  margin-top: .25rem;
   font-size: var(--step--1);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .cookie__link {
@@ -540,14 +551,9 @@ a { color: inherit; }
 .cookie__link:hover,
 .cookie__link:focus-visible { color: var(--blue); }
 
-.cookie__actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: .875rem;
-}
-
 /* The nav's button: it stays put and only changes colour. */
 .cookie__btn {
+  flex: none;
   height: var(--hit);
   padding-inline: 1.375rem;
   border: 1.5px solid var(--green);
