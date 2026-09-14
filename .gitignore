@@ -1,0 +1,5 @@
+# Local editor / agent state, not part of the site
+.claude/
+.DS_Store
+Thumbs.db
+
