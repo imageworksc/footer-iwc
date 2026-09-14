@@ -152,9 +152,101 @@ a { color: inherit; }
    4. FOOTER SHELL
    ========================================================================== */
 .footer {
+  position: relative;
+  isolation: isolate;        /* the wash paints above this ground, below the content */
+  overflow: hidden;
   background: var(--white);
   color: var(--ink);
   border-top: 1px solid var(--border);
+}
+
+/* ---- the ground: the branding page's hero washes, brought down here ----
+   One element per wash, moved by transform: separate clocks and separate
+   directions, so they drift apart and come back together rather than sliding
+   as one sheet. Vertical only, four waypoints that come back round, and
+   periods that share no useful factor — so it reads as something wandering,
+   not as an animation looping. The clocks run at about a third of the hero's:
+   a footer is looked at for seconds, not minutes. Pale on purpose: on a light
+   ground anything stronger stops reading as light and starts reading as
+   decoration.
+
+   The mask brings them in under the hairline and takes them out again before
+   the legal line, so both edges sit on flat white. */
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 62%, transparent 94%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 62%, transparent 94%);
+}
+.wash span {
+  position: absolute;
+  left: 50%;
+  will-change: transform;
+}
+/* green: opens top-left behind the newsletter title and runs down to the right */
+.wash__g {
+  width: 63.5rem; height: 52rem;
+  margin-left: -61.75rem;
+  top: -19.75rem;
+  background: radial-gradient(closest-side ellipse at center, rgba(128, 195, 74, .24), rgba(128, 195, 74, 0) 100%);
+  animation: washG 26s linear infinite;
+}
+/* brand blue: opens top-right behind the field and runs the other way */
+.wash__b {
+  width: 68rem; height: 57rem;
+  margin-left: -4.75rem;
+  top: -18.5rem;
+  background: radial-gradient(closest-side ellipse at center, rgba(18, 102, 181, .21), rgba(18, 102, 181, 0) 100%);
+  animation: washB 37s linear infinite;
+}
+/* sky: the low one, parked under the columns. Slowest and widest. */
+.wash__s {
+  width: 73rem; height: 53.75rem;
+  margin-left: -34rem;
+  top: 12.5rem;
+  background: radial-gradient(closest-side ellipse at center, rgba(46, 140, 214, .21), rgba(46, 140, 214, 0) 100%);
+  animation: washS 47s linear infinite;
+}
+/* A sheen crossing the surface, the way light moves over one. */
+.wash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(102deg,
+    rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .34) 50%, rgba(255, 255, 255, 0) 70%);
+  background-repeat: no-repeat;
+  background-size: 260% 100%;
+  animation: washSheen 19s ease-in-out infinite;
+}
+
+@keyframes washG {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, 22%, 0); }
+  50%  { transform: translate3d(0, 6%, 0); }
+  75%  { transform: translate3d(0, -14%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washB {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, 26%, 0); }
+  50%  { transform: translate3d(0, -8%, 0); }
+  75%  { transform: translate3d(0, -24%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washS {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(0, -18%, 0); }
+  50%  { transform: translate3d(0, 10%, 0); }
+  75%  { transform: translate3d(0, 20%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes washSheen {
+  0%, 100% { background-position: 124% 0; }
+  50%      { background-position: -24% 0; }
 }
 
 
@@ -478,6 +570,8 @@ a { color: inherit; }
    10. REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
+  .wash span,
+  .wash::after { animation: none; }
   .news__input,
   .news__btn,
   .social__link,

@@ -14,8 +14,15 @@ the location map — laid out clean on the design system from the
 
 White ground under a hairline, three rows, and type doing the work: navy for
 what you read first (titles, the phone), the nav's grey for links, muted for
-addresses and legal. The green is spent on one button. No panels, no
-gradients, no icons in boxes — the social marks sit bare under the logo.
+addresses and legal. The green is spent on one button. No panels, no icons
+in boxes — the social marks sit bare under the logo.
+
+Behind it, the branding page's hero washes: three pale ellipses of brand
+colour (green, brand blue, sky), each drifting up and down on its own clock
+(26 / 37 / 47 s — about a third of the hero's, since a footer is looked at
+for seconds), and a sheen crossing over them every 19 s. A mask brings them
+in under the hairline and out again before the legal line. They stop under
+`prefers-reduced-motion`.
 
 1. **Newsletter** — the title and its line on the left, the field and the
    *Subscribe* button on the right.
