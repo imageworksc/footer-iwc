@@ -65,6 +65,13 @@ in under the hairline and out again before the legal line. They stop under
 No build step and no dependencies. Open `index.html` directly, or serve the
 folder with any static server.
 
+Nothing is inline. No `<style>` block, no `style` attribute, no `on…`
+handler, no presentation attributes on the SVGs: the social marks are
+symbols in a sprite at the top of the body, drawn with `<use>` and coloured
+and sized from the stylesheet. The script is ES2015+ — `const`/`let`,
+arrow functions, optional chaining — in one closure with a function per
+behaviour.
+
 ## Reviewing it
 
 - **Desktop (≥ 1024px)** — four columns: brand, services, company, contact.
