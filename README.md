@@ -23,9 +23,8 @@ and made of its parts, turned to face the other way:
 - **The legal bar** is the utility bar mirrored — the same tinted band and
   hairline, 13px at 600, links turning blue on hover.
 - **The cookie notice** is a bar the width of the viewport on the footer's
-  own ground — the navy and the washes, laid sideways for a strip this low —
-  with the green rule along the top, coming up from 8px below on the
-  panels' timings. Its content sits on the footer's shell, so the copy lines
+  navy, flat, with the green rule along the top, coming up from 8px below
+  on the panels' timings. Its content sits on the footer's shell, so the copy lines
   up with the columns and *Accept* with the legal links.
 - **The mark** is set by height at 40px like the nav bar's, and the tokens
   are the nav's, verbatim.

@@ -496,9 +496,8 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE — a bar the width of the viewport, on the footer's ground
-   The navy and the washes, with the green rule along the top and the shadow
-   cast upward. Its content sits on the footer's shell, so the copy lines up
+   8. COOKIE NOTICE — a bar the width of the viewport, on the footer's navy
+   Flat, with the green rule along the top and the shadow cast upward. Its content sits on the footer's shell, so the copy lines up
    with the columns and the button with the legal links. It comes up from
    8px below on the panel's own timings and goes back the same way.
    ========================================================================== */
@@ -507,8 +506,6 @@ a { color: inherit; }
   z-index: 10;
   inset-inline: 0;
   inset-block-end: 0;
-  isolation: isolate;        /* the wash paints above the ground, below the content */
-  overflow: hidden;
   padding-block: .875rem 1rem;
   border-top: 2px solid var(--green);
   box-shadow: 0 -8px 24px rgba(10, 44, 77, .25);
@@ -519,52 +516,6 @@ a { color: inherit; }
 .cookie.is-in {
   opacity: 1;
   transform: none;
-}
-
-/* ---- the washes, cut for a low, wide bar ----
-   The same three glows, laid along the bar and drifting sideways rather
-   than up and down, since across a strip this shallow a vertical drift
-   would only read as a slow pulse. No mask: the bar's own edges do it. */
-.cookie .wash {
-  mask-image: none;
-  -webkit-mask-image: none;
-}
-.cookie .wash span { top: 50%; }
-.cookie .wash__g {
-  width: 40rem; height: 16rem;
-  margin: -8rem 0 0 -46rem;
-  animation: washBarG 26s linear infinite;
-}
-.cookie .wash__b {
-  width: 46rem; height: 18rem;
-  margin: -9rem 0 0 -2rem;
-  animation: washBarB 37s linear infinite;
-}
-.cookie .wash__s {
-  width: 50rem; height: 16rem;
-  margin: -8rem 0 0 -24rem;
-  animation: washBarS 47s linear infinite;
-}
-@keyframes washBarG {
-  0%   { transform: translate3d(0, 0, 0); }
-  25%  { transform: translate3d(14%, 0, 0); }
-  50%  { transform: translate3d(4%, 0, 0); }
-  75%  { transform: translate3d(-10%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-@keyframes washBarB {
-  0%   { transform: translate3d(0, 0, 0); }
-  25%  { transform: translate3d(-16%, 0, 0); }
-  50%  { transform: translate3d(5%, 0, 0); }
-  75%  { transform: translate3d(15%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-@keyframes washBarS {
-  0%   { transform: translate3d(0, 0, 0); }
-  25%  { transform: translate3d(11%, 0, 0); }
-  50%  { transform: translate3d(-6%, 0, 0); }
-  75%  { transform: translate3d(-13%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
 }
 
 .cookie__inner {
@@ -673,7 +624,6 @@ a { color: inherit; }
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .wash span,
-  .cookie .wash span,   /* outranks the bar's own placement rules */
   .wash::after { animation: none; }
   *,
   *::before,
