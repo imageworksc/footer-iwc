@@ -91,8 +91,9 @@ arrow functions, optional chaining — in one closure.
   Narrower than 1920px it stays at the browser default and respects the
   user's font-size setting.
 - **Cookie notice** — a 320px glass card fixed 20px in from the bottom-left
-  corner, floating over whatever is beneath it; under 520px *Accept* fills
-  its width. *Accept* sends it back down and remembers the answer for the
+  corner. As the legal bar scrolls into view the card rides up over it, so
+  it always sits just above the line, never on it; under 520px *Accept*
+  fills its width. *Accept* sends it back down and remembers the answer for the
   tab (`sessionStorage`), so a new tab brings it back for review. To make it
   stick across visits like the live site, change `sessionStorage` to
   `localStorage` in `script.js`.
