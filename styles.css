@@ -496,13 +496,16 @@ a { color: inherit; }
    The navy at half strength over a blur, so the washes drifting behind it
    show through; a hairline of light round it and along its top edge, and a
    soft shadow underneath. It comes up from 8px below on the panels' timings,
-   goes back the same way, and lifts a touch under the cursor.
+   goes back the same way, lifts a touch under the cursor, and rides up over
+   the legal bar as that scrolls into view, so it never sits on the line.
    ========================================================================== */
 .cookie {
   position: fixed;
   z-index: 10;
   inset-inline-start: 1.25rem;
-  inset-block-end: 1.25rem;
+  /* --cookie-lift is how much of the legal bar is showing, set by script.js
+     on scroll, so the card rides up over it and sits just above the line */
+  inset-block-end: calc(1.25rem + var(--cookie-lift, 0px));
   width: min(20rem, calc(100% - 2.5rem));
   padding: .875rem 1rem 1rem;
   border: 1px solid rgba(255, 255, 255, .18);

@@ -63,7 +63,7 @@ in under the hairline and out again before the legal line. They stop under
 | --- | --- |
 | `index.html` | The footer, the cookie panel, and an empty page body above them |
 | `styles.css` | Brand tokens, the footer, and the cookie panel |
-| `script.js` | The cookie card: showing it, and Accept |
+| `script.js` | The cookie card: showing it, keeping it above the legal bar, and Accept |
 | `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
 | `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |
