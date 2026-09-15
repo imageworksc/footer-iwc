@@ -2,7 +2,7 @@
 
 The site footer on its own: the *Services* / *Company* / *Platform
 Expertise* menus, contact and both locations, the legal line, and the
-cookie notice that sits at the foot of the viewport. Same copy and
+cookie notice floating in the bottom-left corner. Same copy and
 structure as the footer on
 [imageworks-home](https://github.com/imageworksc/imageworks-home) — minus
 the location map — laid out clean on the design system from the
@@ -61,7 +61,7 @@ in under the hairline and out again before the legal line. They stop under
 | --- | --- |
 | `index.html` | The footer, the cookie panel, and an empty page body above them |
 | `styles.css` | Brand tokens, the footer, and the cookie panel |
-| `script.js` | The cookie panel: showing it, Accept, and the room the legal bar keeps for it |
+| `script.js` | The cookie card: showing it, and Accept |
 | `assets/logo-white.png` | The white mark for the navy ground, copied from `imageworksc/imageworks-home` |
 | `assets/logo.png` | The colour mark, for running the footer on white |
 | `.github/workflows/deploy.yml` | Publishes the folder to GitHub Pages on every push to `main` |

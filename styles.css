@@ -447,10 +447,6 @@ a { color: inherit; }
   position: relative;          /* above the wash, which is already gone by here */
   background: var(--band-tint);
   border-top: 1px solid var(--border);
-  /* room for the cookie panel while it is up, set by script.js, so it never
-     covers the line once you reach the foot of the page */
-  padding-bottom: var(--cookie-dock, 0px);
-  transition: padding-bottom .22s var(--ease);
 }
 
 .legal__inner {
@@ -496,70 +492,88 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   8. COOKIE NOTICE — a bar the width of the viewport, on the footer's navy
-   Flat, with the green rule along the top and the shadow cast upward. Its content sits on the footer's shell, so the copy lines up
-   with the columns and the button with the legal links. It comes up from
-   8px below on the panel's own timings and goes back the same way.
+   8. COOKIE NOTICE — a small glass card in the bottom-left corner
+   The navy at half strength over a blur, so the washes drifting behind it
+   show through; a hairline of light round it and along its top edge, and a
+   soft shadow underneath. It comes up from 8px below on the panels' timings,
+   goes back the same way, and lifts a touch under the cursor.
    ========================================================================== */
 .cookie {
   position: fixed;
   z-index: 10;
-  inset-inline: 0;
-  inset-block-end: 0;
-  padding-block: .875rem 1rem;
-  border-top: 2px solid var(--green);
-  box-shadow: 0 -8px 24px rgba(10, 44, 77, .25);
+  inset-inline-start: 1.25rem;
+  inset-block-end: 1.25rem;
+  width: min(20rem, calc(100% - 2.5rem));
+  padding: .875rem 1rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: var(--r);
+  background: rgba(10, 44, 77, .55);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+          backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    0 12px 32px -8px rgba(10, 44, 77, .45);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity .18s var(--ease), transform .22s var(--ease);
+  transition: opacity .18s var(--ease), transform .25s var(--ease),
+              border-color .2s var(--ease), box-shadow .25s ease;
 }
 .cookie.is-in {
   opacity: 1;
   transform: none;
 }
-
-.cookie__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: .875rem 2.5rem;
+.cookie.is-in:hover,
+.cookie.is-in:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, .28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .16),
+    0 16px 40px -8px rgba(10, 44, 77, .55);
+}
+/* no blur to be had: the navy goes almost solid instead */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cookie { background: rgba(10, 44, 77, .94); }
 }
 
 .cookie__text {
-  flex: 1 1 30rem;
-  font-size: var(--step-0);
+  font-size: var(--step--2);
   line-height: 1.5;
+  color: rgba(255, 255, 255, .88);
 }
 
 .cookie__link {
-  color: var(--green-ink);
+  color: var(--green);
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;  /* never break "Privacy Policy" across lines */
   transition: color .18s var(--ease);
 }
 .cookie__link:hover,
-.cookie__link:focus-visible { color: var(--navy); }
+.cookie__link:focus-visible { color: var(--white); }
 
-/* The nav's button: it stays put and only changes colour. */
+.cookie__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .75rem;
+}
+
+/* The nav's button, a size down: it stays put and only changes colour. */
 .cookie__btn {
-  flex: none;
-  height: var(--hit);
-  padding-inline: 1.375rem;
-  border: 1.5px solid var(--green);
+  height: 2.25rem;
+  padding-inline: 1rem;
+  border: 0;
   border-radius: var(--r);
   background: var(--green);
   color: var(--white);
   font: inherit;
-  font-size: var(--step-0);
+  font-size: var(--step--2);
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
   transition: filter .18s var(--ease);
 }
 .cookie__btn:hover,
-.cookie__btn:focus-visible { filter: brightness(1.06); }
+.cookie__btn:focus-visible { filter: brightness(1.08); }
 
 /* ==========================================================================
    9. BREAKPOINTS
@@ -628,4 +642,6 @@ a { color: inherit; }
   *,
   *::before,
   *::after { transition-duration: .001ms !important; }
+  .cookie.is-in:hover,
+  .cookie.is-in:focus-within { transform: none; }
 }
