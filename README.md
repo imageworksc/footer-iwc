@@ -52,8 +52,8 @@ in under the hairline and out again before the legal line. They stop under
 
 1. **Columns** — the logo and social marks; *Services* (with *AI Website
    Design* pointing at the [AI web design page](https://imageworksc.github.io/ai-web-design/));
-   *Company* with *Platform Expertise* and *Intelligence* (the AI-run
-   website manager, as *ImageWorks Intelligence*) stacked under it; and contact: the
+   *Company* with *Platform Expertise* and *AI Stack* (the AI-run website
+   manager, as *ImageWorks Intelligence*) stacked under it; and contact: the
    phone first as a real `tel:` link, then both locations as a panel row's
    title over a quieter line.
 2. **Legal** — the copyright left, *Sitemap* and *Privacy Policy* right.
